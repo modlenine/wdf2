@@ -3888,6 +3888,8 @@
                     console.log(res.data);
                     if(res.data.status == "Select Data Success"){
                         let financeClearData = res.data.financeClearData;
+                        let pricewithvat = financeClearData.wdf_pricewithvat;
+                        let pricewithvat_clear = financeClearData.wdf_pricewithvat_clear;
 
                         if(financeClearData.wdf_fnc_appr != null){
                             let condateFinanceClear = moment(financeClearData.wdf_fnc_datetime).format('DD/MM/Y HH:mm:ss');
@@ -3925,8 +3927,8 @@
                             let user = "<?php echo getUser()->Fname." ".getUser()->Lname; ?>";
                             let dept = "<?php echo getUser()->Dept; ?>";
                             let datetime = "<?php echo date("d/m/Y H:i:s"); ?>";
-                            let totalmoneyWithVat = $("#ipv-advdetail-priceTotal").val().replace(/,/g, "");
-                            let realMoneyWithVat = $('#ip-advdetail-priceTotal-clear').val().replace(/,/g, "");
+                            let totalmoneyWithVat = pricewithvat;
+                            let realMoneyWithVat = pricewithvat_clear;
 
 
                             $('#ip-fnClearSec-user').val(user).prop('readonly' , true);
@@ -3953,7 +3955,10 @@
                                 $('#ip-fnClearSec-method-3').prop('checked' , true);
                             }
 
+                            moneyTofinance = moneyTofinance.toFixed(2);
+
                             console.log('Total Money : '+totalmoneyWithVat+' Real Money : '+realMoneyWithVat);
+
                             $('#ip-fnClearSec-money').val(numberWithCommas(moneyTofinance));
 
                             $('#check-fnClearSec-appGroup').val(appgroup);

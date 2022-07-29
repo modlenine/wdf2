@@ -1913,7 +1913,9 @@ class Advance_model extends CI_Model {
             wdf_master.wdf_fnc_dept,
             wdf_master.wdf_fnc_deptcode,
             wdf_master.wdf_fnc_ecode,
-            wdf_master.wdf_fnc_datetime
+            wdf_master.wdf_fnc_datetime,
+            wdf_master.wdf_pricewithvat,
+            wdf_master.wdf_pricewithvat_clear
             FROM
             wdf_master
             WHERE wdf_formcode = '$formcode' AND wdf_areaid = '$areaid'

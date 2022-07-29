@@ -98,7 +98,7 @@ function emailSaveData($subject , $body ,$to , $cc)
           }
         </style>
     '.$body;
-    $mail->send();
+    // $mail->send();
 }
 
 

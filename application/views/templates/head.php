@@ -501,6 +501,35 @@
 													continue;
 												}
 											}
+										}else if(resultDataUser[i].wdf_status == "Manager approved" || resultDataUser[i].wdf_status == "Wait Executive Group "+resultDataUser[i].wdf_appgroup+" Approve"){
+											if(resultDataUser[i].wdf_areaid == "tb"){
+												if(userEcode == "M2076" || userEcode == "M2077"){
+
+													//For wait excutive approve
+													for(let ii = 0; ii < userAppData.length; ii++){
+														//Section check app group 4 3 2 1 0
+														if(resultDataUser[i].wdf_formcode == userAppData[ii].apv_formcode){
+															html += `
+																<li>
+																	<a href="`+url+page+resultDataUser[i].wdf_formcode+`/`+resultDataUser[i].wdf_formno+`">
+																		<h3>`+resultDataUser[i].wdf_formno+`</h3>
+																		<p><b>ผู้ร้องขอ : </b>`+resultDataUser[i].wdf_user+`</p>
+																		<p><b>วันที่ร้องขอ : </b>`+moment(resultDataUser[i].wdf_datetime).format('DD/MM/Y HH:mm:ss')+`</p>
+																		<p><b>สถานะ : </b>`+resultDataUser[i].wdf_status+`</p>
+																	</a>
+																</li>
+																<hr>
+																`;
+
+																countFormByCondition++;
+														}else{
+															continue;
+														}
+
+													}
+													
+												}
+											}
 										}
 
 
