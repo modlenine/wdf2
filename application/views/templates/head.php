@@ -486,7 +486,7 @@
 									if(resultDataUser[i].wdf_status == "Check budget already"){
 										// เช็คเงื่อนไขว่าใช่บริษัท The bubbles หรือไม่
 										if(resultDataUser[i].wdf_areaid == "tb"){
-											if(userEcode == "M0051"){
+											if(userEcode == "M0051" || userEcode == "M0963"){
 												//Section check Manager the bubbles
 												html += `
 												<li>

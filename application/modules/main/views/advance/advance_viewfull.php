@@ -597,7 +597,7 @@
                     if(doc_deptcode == userdeptcode && userposi > 55){
                         $('#manager_section').css('display' , '');
                         checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076"){
+                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963"){
                         $('#manager_section').css('display' , '');
                         checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
                     }else if(doc_deptcode == '1007' || doc_deptcode == '1010'){
@@ -612,7 +612,11 @@
                     // Section manager approve
 
                     if(areaid == "tb"){
-                        if(userecode == "M0051" || userecode == "M1809" || userecode == "M2076" || userecode == "M2222"){
+                        if(userecode == "M0051" || 
+                        userecode == "M1809" || 
+                        userecode == "M2076" || 
+                        userecode == "M2222" || 
+                        userecode == "M0963"){
                             $('#btn-saveManager').css('display' , '');
                         }else{
                             $('#btn-saveManager').css('display' , 'none');
@@ -1295,7 +1299,7 @@
                         }
 
                         if(areaid == "tb"){
-                            if(userecode == "M0051" || userecode == "M1809" || userecode == "M2076" || userecode == "M2222"){
+                            if(userecode == "M0051" || userecode == "M1809" || userecode == "M2076" || userecode == "M2222" || userecode == "M0963"){
                                 $('#btn-saveManagerClear').css('display' , '');
                             }else{
                                 $('#btn-saveManagerClear').css('display' , 'none');

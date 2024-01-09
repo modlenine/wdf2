@@ -80,7 +80,6 @@ function getFormNo_wdf()
 
     return $formno;
 }
-//test
 
 function getFormNo_adv()
 {
