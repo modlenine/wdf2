@@ -567,7 +567,10 @@
                     if(doc_deptcode == userdeptcode && userposi > 55){
                         $('#manager_section_sal').css('display' , '');
                         checkpaygroup_sal(pricewithVat , 'sal' , areaid , formcode);
-                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076"){
+                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963"){
+                        $('#manager_section_sal').css('display' , '');
+                        checkpaygroup_sal(pricewithVat , 'sal' , areaid , formcode);
+                    }else if(areaid == "sc" && userecode == "M0963" || areaid == "ca" && userecode == "M0963" || areaid == "st" && userecode == "M0963" || areaid == "pa" && userecode == "M0963"){
                         $('#manager_section_sal').css('display' , '');
                         checkpaygroup_sal(pricewithVat , 'sal' , areaid , formcode);
                     }
