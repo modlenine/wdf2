@@ -47,7 +47,7 @@ function emailSaveData($subject , $body ,$to , $cc)
     $mail->SMTPDebug = 1;
     // $mail->SMTPSecure = "ssl";                                    // set mailer to use SMTP
     $mail->Host = "mail.saleecolour.net";  // specify main and backup server
-    $mail->Port = 25; // พอร์ท
+    $mail->Port = 587; // พอร์ท
     $mail->SMTPAuth = true;     // turn on SMTP authentication
     $mail->Username = getEmailUser()->email_user;  // SMTP username
     $mail->Password = getEmailUser()->email_password; // SMTP password
@@ -126,7 +126,7 @@ function emailSaveData2($subject , $body ,$to , $cc)
     $mail->SMTPDebug = 1;
     // $mail->SMTPSecure = "ssl";                                    // set mailer to use SMTP
     $mail->Host = "mail.saleecolour.net";  // specify main and backup server
-    $mail->Port = 25; // พอร์ท
+    $mail->Port = 587; // พอร์ท
     $mail->SMTPAuth = true;     // turn on SMTP authentication
     $mail->Username = getEmailUser2()->email_user;  // SMTP username
     $mail->Password = getEmailUser2()->email_password; // SMTP password
@@ -190,7 +190,7 @@ function emailSaveData2($subject , $body ,$to , $cc)
 }
 
 
-function emailSaveData_test($subject , $body ,$to , $cc)
+function emailSaveData_test($subject , $body ,$to="" , $cc="")
 {
     require("PHPMailer_5.2.0/class.phpmailer.php");
 
@@ -200,7 +200,7 @@ function emailSaveData_test($subject , $body ,$to , $cc)
     $mail->SMTPDebug = 1;                                      // set mailer to use SMTP
     $mail->Host = "mail.saleecolour.net";  // specify main and backup server
 
-    $mail->Port = 25; // พอร์ท
+    $mail->Port = 587; // พอร์ท
 
     $mail->SMTPAuth = true;     // turn on SMTP authentication
     $mail->Username = getEmailUser()->email_user;  // SMTP username
@@ -209,13 +209,13 @@ function emailSaveData_test($subject , $body ,$to , $cc)
     $mail->FromName = "โปรแกรมใบเบิกเงินทดรองจ่าย - ใบขอเบิกจ่าย";
 
 
-    foreach($to as $email){
-        $mail->AddAddress($email);
-    }
+    // foreach($to as $email){
+    //     $mail->AddAddress($email);
+    // }
 
-    foreach($cc as $email){
-        $mail->AddCC($email);
-    }
+    // foreach($cc as $email){
+    //     $mail->AddCC($email);
+    // }
 
     // $mail->AddAddress("chainarong_k@saleecolour.com");
     $mail->AddBCC("chainarong_k@saleecolour.com");
@@ -258,9 +258,10 @@ function emailSaveData_test($subject , $body ,$to , $cc)
     '.$body;
     
 
-    if($_SERVER['HTTP_HOST'] != "localhost"){
-        $mail->send();
-    }
+    // if($_SERVER['HTTP_HOST'] != "localhost"){
+    //     $mail->send();
+    // }
+    $mail->send();
 }
 
 
