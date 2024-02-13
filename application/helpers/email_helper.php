@@ -769,6 +769,17 @@ function getEmail_manager($formcode , $formno , $userdeptcode , $areaid)
                 if($sql->num_rows() != 0){
                     return $sql;
                 }
+            }else if($userdeptcode == 1015 || $userdeptcode == 1014){//เพิ่มสิทธิ์ของ ผจก Lab ที่ควบ 2 แผนก
+                $sql = emailobj()->db2->query("SELECT
+                memberemail,
+                ecode
+                FROM member
+                WHERE DeptCode = '$userdeptcode' AND posi in (55,65,75) OR ecode = 'M0112' AND resigned != 1
+                ");
+    
+                if($sql->num_rows() != 0){
+                    return $sql;
+                }
             }else{
                 $sql = emailobj()->db2->query("SELECT
                 memberemail,

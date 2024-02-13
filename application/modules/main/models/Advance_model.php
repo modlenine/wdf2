@@ -475,6 +475,10 @@ class Advance_model extends CI_Model {
             echo json_encode(
                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1010' , '1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
             );
+        }else if($ecode == "M0112"){
+            echo json_encode(
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+            );
         }else{
             if($ecode == "M0963"){
                 echo json_encode(

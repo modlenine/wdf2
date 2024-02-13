@@ -608,6 +608,11 @@
                     }else if(areaid == "st" && userecode == "M2180"){
                         $('#manager_section').css('display' , '');
                         checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                    }else if(doc_deptcode == '1014' || doc_deptcode == '1015'){
+                        if(userecode == "M0112"){
+                            $('#manager_section').css('display' , '');
+                            checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                        }
                     }
                     // Section manager approve
 
