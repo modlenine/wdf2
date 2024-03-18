@@ -642,12 +642,24 @@ class Advance_model extends CI_Model {
     {
         $received_data = json_decode(file_get_contents("php://input"));
         if($received_data->action == "cancel_adv"){
+
             $formcode = $received_data->data_formcode;
             $arUpdateStatus = array(
                 "wdf_status" => "User cancel"
             );
             $this->db->where("wdf_formcode" , $formcode);
             $this->db->update("wdf_master" , $arUpdateStatus);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             $output = array(
                 "msg" => "ยกเลิกเอกสารเรียบร้อยแล้ว",
@@ -668,6 +680,18 @@ class Advance_model extends CI_Model {
         if($this->input->post("ip-bgsec-creditlimit") != ""){
             $formcode = $this->input->post("check_formcode_bg");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             $arsaveCheckBudget = array(
                 "wdf_bg_creditlimit" => conPrice($this->input->post("ip-bgsec-creditlimit")),
                 "wdf_bg_memo" => $this->input->post("ip-bgsec-memo"),
@@ -918,6 +942,18 @@ class Advance_model extends CI_Model {
         if($this->input->post("ip-mgrsec-appro") != ""){
             $formcode = $this->input->post("check-mg-formcode");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Save data to wdf_master table
             if($this->input->post("ip-mgrsec-appro") == "อนุมัติ"){
                 $managerStatus = "Manager approved";
