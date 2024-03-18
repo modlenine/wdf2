@@ -591,6 +591,21 @@
 
 												}
 											}
+										}else if(userEcode == "M0040"){
+												//Section check Manager
+												html += `
+												<li>
+													<a href="`+url+page+resultDataUser[i].wdf_formcode+`/`+resultDataUser[i].wdf_formno+`">
+														<h3>`+resultDataUser[i].wdf_formno+`</h3>
+														<p><b>ผู้ร้องขอ : </b>`+resultDataUser[i].wdf_user+`</p>
+														<p><b>วันที่ร้องขอ : </b>`+moment(resultDataUser[i].wdf_datetime).format('DD/MM/Y HH:mm:ss')+`</p>
+														<p><b>สถานะ : </b>`+resultDataUser[i].wdf_status+`</p>
+													</a>
+												</li>
+												<hr>
+												`;
+
+												countFormByCondition++;
 										}else{
 											//For wait excutive approve
 											for(let ii = 0; ii < userAppData.length; ii++){
@@ -618,7 +633,8 @@
 									}
 
 
-								}else if(resultDataUser[i].wdf_appgroup != "5"){
+								}
+								else if(resultDataUser[i].wdf_appgroup != "5"){
 									// Query user approve
 									//For wait excutive approve
 									for(let ii = 0; ii < userAppData.length; ii++){

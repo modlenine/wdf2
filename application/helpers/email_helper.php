@@ -21,7 +21,6 @@ function emailobj()
 }
 
 
-
 function getEmailUser()
 {
     $query = emailobj()->db->query("SELECT * FROM email_information WHERE email_id = 1");
@@ -33,7 +32,6 @@ function getEmailUser2()
     $query = emailobj()->db->query("SELECT * FROM email_information WHERE email_id = 2");
     return $query->row();
 }
-
 
 
 function emailSaveData($subject , $body ,$to , $cc)
@@ -104,14 +102,15 @@ function emailSaveData($subject , $body ,$to , $cc)
     '.$body;
     
 
-    // if($_SERVER['HTTP_HOST'] != "localhost"){
-    //     if(!$mail->send()){
-    //         emailSaveData2($subject , $body ,$to , $cc);
-    //     }
-    // }
-    if(!$mail->send()){
-        emailSaveData2($subject , $body ,$to , $cc);
+    if($_SERVER['HTTP_HOST'] != "localhost"){
+        if(!$mail->send()){
+            emailSaveData2($subject , $body ,$to , $cc);
+        }
     }
+
+    // if(!$mail->send()){
+    //     emailSaveData2($subject , $body ,$to , $cc);
+    // }
     // $mail->send();
 }
 
@@ -183,10 +182,10 @@ function emailSaveData2($subject , $body ,$to , $cc)
     '.$body;
     
 
-    // if($_SERVER['HTTP_HOST'] != "localhost"){
-    //     $mail->send();
-    // }
-    $mail->send();
+    if($_SERVER['HTTP_HOST'] != "localhost"){
+        $mail->send();
+    }
+    // $mail->send();
 }
 
 
@@ -263,7 +262,6 @@ function emailSaveData_test($subject , $body ,$to="" , $cc="")
     // }
     $mail->send();
 }
-
 
 
 // Get Data For use Advance send Email
