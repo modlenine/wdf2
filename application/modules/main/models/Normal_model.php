@@ -652,6 +652,17 @@ class Normal_model extends CI_Model {
             $this->db->where("wdf_formcode" , $formcode);
             $this->db->update("wdf_master" , $arUpdateStatus);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             $output = array(
                 "msg" => "ยกเลิกเอกสารเรียบร้อยแล้ว",
                 "status" => "Update Data Success"
@@ -671,6 +682,18 @@ class Normal_model extends CI_Model {
         if($this->input->post("ip-nor-bgsec-creditlimit") != ""){
             $formcode = $this->input->post("check_formcode_bg_nor");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             $arsaveCheckBudget = array(
                 "wdf_bg_creditlimit" => conPrice($this->input->post("ip-nor-bgsec-creditlimit")),
                 "wdf_bg_memo" => $this->input->post("ip-nor-bgsec-memo"),
@@ -973,6 +996,17 @@ class Normal_model extends CI_Model {
                 $formcode = $this->input->post("check-mg-formcode-nor");
                 $formno = conFormcodeToFormNo($formcode);
                 $appGroup = getDataAppGroup($formcode , $areaid)->wdf_appgroup;
+
+                //update old status
+                //Send to notifycenter
+                $notifyformno = conFormcodeToFormNo($formcode);
+                $notifyprogramname = "WDF";
+                $notifystatus = "action done";
+                $notifytype = "take action";
+
+                $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                //Send to notifycenter
+                //update old status
                 
                 if($appGroup == 4 || $appGroup == 3 || $appGroup == 2 || $appGroup == 1 || $appGroup == 0){
                     $this->noremail->send_to_excutive($formcode , $formno);
@@ -1311,12 +1345,33 @@ class Normal_model extends CI_Model {
                         $statusText = "Wait Executive Group $group Approve";
     
                     }else if($countAppNow->num_rows() == $totalApprove){
+
+                        //update old status
+                        //Send to notifycenter
+                        $notifyformno = conFormcodeToFormNo($formcode);
+                        $notifyprogramname = "WDF";
+                        $notifystatus = "action done";
+                        $notifytype = "take action";
+
+                        $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                        //Send to notifycenter
+                        //update old status
     
                         $statusText = "Executive Group $group Approved";
                         $this->noremail->send_to_apExcutive($formcode , $formno);
                     }
                 }else if($checkApproveStatus == 0){
                     $statusText = "Executive Group $group Not Approve";
+                    //update old status
+                    //Send to notifycenter
+                    $notifyformno = conFormcodeToFormNo($formcode);
+                    $notifyprogramname = "WDF";
+                    $notifystatus = "action done";
+                    $notifytype = "take action";
+
+                    $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                    //Send to notifycenter
+                    //update old status
                 }
                 
 
@@ -1369,6 +1424,17 @@ class Normal_model extends CI_Model {
             $formcode = $this->input->post("check-apsec-formcode-nor");
             $areaid = $this->input->post("check-apsec-areaid-nor");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             $apApprove = $this->input->post("ip-nor-apsec-appro");
@@ -1459,6 +1525,17 @@ class Normal_model extends CI_Model {
             $areaid = $this->input->post("check-accsec-areaid-nor");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $accApprove = $this->input->post("ip-nor-accSec-appro");
             $accStatus = "";
@@ -1547,6 +1624,17 @@ class Normal_model extends CI_Model {
             $areaid = $this->input->post("check-fnsec-areaid-nor");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $fnApprove = $this->input->post("ip-nor-fnSec-appro");
             $fnStatus = "";
@@ -1633,6 +1721,17 @@ class Normal_model extends CI_Model {
             $formcode = $this->input->post("check-userreceivesec-formcode-nor");
             $areaid = $this->input->post("check-userreceivesec-areaid-nor");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             
