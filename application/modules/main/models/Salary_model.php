@@ -637,6 +637,19 @@ class Salary_model extends CI_Model {
         $received_data = json_decode(file_get_contents("php://input"));
         if($received_data->action == "cancel_sal"){
             $formcode = $received_data->data_formcode;
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
+
             $arUpdateStatus = array(
                 "wdf_status" => "User cancel"
             );
@@ -660,6 +673,21 @@ class Salary_model extends CI_Model {
     public function save_checkbudget_sal()
     {
         if($this->input->post("ip-sal-bgsec-creditlimit") != ""){
+
+            $formcode = $this->input->post("check_formcode_bg_sal");
+            $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             $arsaveCheckBudget = array(
                 "wdf_bg_creditlimit" => conPrice($this->input->post("ip-sal-bgsec-creditlimit")),
                 "wdf_bg_memo" => $this->input->post("ip-sal-bgsec-memo"),
@@ -675,8 +703,6 @@ class Salary_model extends CI_Model {
             $this->db->where("wdf_areaid" , $this->input->post("check_areaid_bg_sal"));
             $this->db->update("wdf_master" , $arsaveCheckBudget);
 
-            $formcode = $this->input->post("check_formcode_bg_sal");
-            $formno = conFormcodeToFormNo($formcode);
             $this->salemail->send_to_manager($formcode , $formno);
 
             $output = array(
@@ -964,6 +990,18 @@ class Salary_model extends CI_Model {
                 $areaid = $this->input->post("check-mg-areaid-sal");
                 $formno = conFormcodeToFormNo($formcode);
                 $appGroup = getDataAppGroup($formcode , $areaid)->wdf_appgroup;
+
+                //update old status
+                //Send to notifycenter
+                $notifyformno = conFormcodeToFormNo($formcode);
+                $notifyprogramname = "WDF";
+                $notifystatus = "action done";
+                $notifytype = "take action";
+
+                $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                //Send to notifycenter
+                //update old status
+
     
                 if($appGroup == 4 || $appGroup == 3 || $appGroup == 2 || $appGroup == 1 || $appGroup == 0){
                     $this->salemail->send_to_excutive($formcode , $formno);
@@ -1185,9 +1223,6 @@ class Salary_model extends CI_Model {
     }
 
 
-
-
-
     public function savePayGroup_sal()
     {
         $ecode = getUser()->ecode;
@@ -1227,11 +1262,34 @@ class Salary_model extends CI_Model {
                         $statusText = "Wait Executive Group $group Approve";
     
                     }else if($countAppNow->num_rows() == $totalApprove){
+
+                        //update old status
+                        //Send to notifycenter
+                        $notifyformno = conFormcodeToFormNo($formcode);
+                        $notifyprogramname = "WDF";
+                        $notifystatus = "action done";
+                        $notifytype = "take action";
+
+                        $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                        //Send to notifycenter
+                        //update old status
     
                         $statusText = "Executive Group $group Approved";
                         $this->salemail->send_to_apExcutive($formcode , $formno);
                     }
                 }else if($checkApproveStatus == 0){
+
+                    //update old status
+                    //Send to notifycenter
+                    $notifyformno = conFormcodeToFormNo($formcode);
+                    $notifyprogramname = "WDF";
+                    $notifystatus = "action done";
+                    $notifytype = "take action";
+
+                    $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                    //Send to notifycenter
+                    //update old status
+
                     $statusText = "Executive Group $group Not Approve";
                 }
                 
@@ -1285,6 +1343,17 @@ class Salary_model extends CI_Model {
             $formcode = $this->input->post("check-apsec-formcode-sal");
             $areaid = $this->input->post("check-apsec-areaid-sal");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             $apApprove = $this->input->post("ip-sal-apsec-appro");
@@ -1375,6 +1444,17 @@ class Salary_model extends CI_Model {
             $areaid = $this->input->post("check-accsec-areaid-sal");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $accApprove = $this->input->post("ip-sal-accSec-appro");
             $accStatus = "";
@@ -1463,6 +1543,17 @@ class Salary_model extends CI_Model {
             $areaid = $this->input->post("check-fnsec-areaid-sal");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $fnApprove = $this->input->post("ip-sal-fnSec-appro");
             $fnStatus = "";
@@ -1549,6 +1640,18 @@ class Salary_model extends CI_Model {
             $formcode = $this->input->post("check-userreceivesec-formcode-sal");
             $areaid = $this->input->post("check-userreceivesec-areaid-sal");
             $formno = conFormcodeToFormNo($formcode);
+
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             

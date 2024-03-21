@@ -96,10 +96,14 @@ class Salaryemail_model extends CI_Model
 
       //  Email Zone
       $optionTo = getEmail_acc_BySection("u_budget_section");
+      
+      $ecodeAr = array();
+      $ecodeccAr = array();
 
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['u_email'];
+         $ecodeAr[]= $result['u_ecode'];
       }
 
 
@@ -107,10 +111,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email หาบัญชีเพื่อตรวจสอบ Budget
 
@@ -193,10 +215,13 @@ class Salaryemail_model extends CI_Model
 
       //  Email Zone
       $optionTo = getEmail_managerSaraly($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
+      $ecodeAr = array();
+      $ecodeccAr = array();
 
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['memberemail'];
+         $ecodeAr[] = $result['ecode'];
       }
 
 
@@ -204,10 +229,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To Manager
 
@@ -315,9 +358,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_acc_BySection("u_ap_section");
 
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['u_email'];
+         $ecodeAr[] = $result['u_ecode'];
       }
 
 
@@ -325,10 +372,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To AP Pay Group = 5
 
@@ -442,9 +507,14 @@ class Salaryemail_model extends CI_Model
 
 
       $optionTo = getDataAppUser($emaildata->wdf_appgroup , $formcode , $emaildata->wdf_areaid);
+
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['apv_email'];
+         $ecodeAr[] = $result['apv_ecode'];
       }
 
 
@@ -452,10 +522,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To Excutive Pay Group = 5
 
@@ -589,9 +677,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_acc_BySection("u_ap_section");
 
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['u_email'];
+         $ecodeAr[] = $result['u_ecode'];
       }
 
 
@@ -599,10 +691,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To Excutive Pay Group = 4 , 3 , 2 , 1
 
@@ -737,9 +847,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_acc_BySection("u_acc_section");
 
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['u_email'];
+         $ecodeAr[] = $result['u_ecode'];
       }
 
 
@@ -747,10 +861,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To Account Pay Group = 5
 
@@ -913,9 +1045,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_acc_BySection("u_acc_section");
 
+      $ecodeAr = array();
+      $ecodeccAr =  array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['u_email'];
+         $ecodeAr[] = $result['u_ecode'];
       }
 
 
@@ -923,10 +1059,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To Account Pay Group = 4 , 3 , 2 , 1
 
@@ -1084,9 +1238,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_acc_BySection("u_finance_section");
 
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['u_email'];
+         $ecodeAr[] = $result['u_ecode'];
       }
 
 
@@ -1094,10 +1252,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To Finance Pay Group = 5
 
@@ -1283,9 +1459,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_acc_BySection("u_finance_section");
 
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['u_email'];
+         $ecodeAr[] = $result['u_ecode'];
       }
 
 
@@ -1293,10 +1473,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To Finance Pay Group = 4 , 3 , 2 , 1
 
@@ -1478,9 +1676,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['memberemail'];
+         $ecodeAr[] = $result['ecode'];
       }
 
 
@@ -1488,10 +1690,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['u_email'];
+         $ecodeccAr[] = $resultcc['u_ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To User Pay Group = 5
    
@@ -1701,9 +1921,13 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
+      $ecodeAr = array();
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['memberemail'];
+         $ecodeAr[] = $result['ecode'];
       }
 
 
@@ -1711,10 +1935,28 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['u_email'];
+         $ecodeccAr[] = $resultcc['u_ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeAr = array_unique($ecodeAr);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeActionArr = $ecodeAr;
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -1915,9 +2157,12 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['memberemail'];
+         $ecodeccAr[] = $result['ecode'];
       }
 
 
@@ -1925,10 +2170,25 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To User Pay Group = 5
    
@@ -2157,9 +2417,12 @@ class Salaryemail_model extends CI_Model
       //  Email Zone
       $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
+      $ecodeccAr = array();
+
       $to = array();
       foreach ($optionTo->result_array() as $result) {
          $to[] = $result['memberemail'];
+         $ecodeccAr[] = $result['ecode'];
       }
 
 
@@ -2167,10 +2430,25 @@ class Salaryemail_model extends CI_Model
       $cc = array();
       foreach ($optioncc->result_array() as $resultcc) {
          $cc[] = $resultcc['memberemail'];
+         $ecodeccAr[] = $resultcc['ecode'];
       }
+
+      $to = array_unique($to);
+      $cc = array_unique($cc);
+      $ecodeccAr = array_unique($ecodeccAr);
 
       emailSaveData($subject, $body, $to, $cc);
       //  Email Zone
+
+      // Notification center program
+      $ecodeReadArr = $ecodeccAr;
+
+      $title = $subject;
+      $status = $emaildata->wdf_status;
+      $link = base_url('salary_view.html/') . $formcode."/".$formno;
+      $programname = "WDF";
+
+      $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
    }
    // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
