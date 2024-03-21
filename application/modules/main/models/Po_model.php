@@ -548,6 +548,18 @@ class Po_model extends CI_Model {
         $received_data = json_decode(file_get_contents("php://input"));
         if($received_data->action == "cancel_po"){
             $formcode = $received_data->data_formcode;
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             $arUpdateStatus = array(
                 "wdf_status" => "User cancel"
             );
@@ -575,6 +587,17 @@ class Po_model extends CI_Model {
             $formcode = $this->input->post("check-apsec-formcode-po");
             $areaid = $this->input->post("check-apsec-areaid-po");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             $apApprove = $this->input->post("ip-po-apsec-appro");
@@ -660,6 +683,17 @@ class Po_model extends CI_Model {
             $areaid = $this->input->post("check-accsec-areaid-po");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $accApprove = $this->input->post("ip-po-accSec-appro");
             $accStatus = "";
@@ -742,6 +776,17 @@ class Po_model extends CI_Model {
             $formcode = $this->input->post("check-fnsec-formcode-po");
             $areaid = $this->input->post("check-fnsec-areaid-po");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = conFormcodeToFormNo($formcode);
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             $fnApprove = $this->input->post("ip-po-fnSec-appro");
