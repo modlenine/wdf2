@@ -3455,6 +3455,7 @@
 
         function savePayGroup(ecode)
         {
+            $('#btn-savePaygroup-'+userecode).prop('disabled' , true);
             const form = $('#frm_save_paygroup-'+ecode)[0];
             const data = new FormData(form);
             axios.post(url+'main/advance/savePayGroup' , data , {
@@ -4839,6 +4840,7 @@
 
         function savePayGroupClear(ecode)
         {
+            $('#btn-savePaygroupClear-'+ecode).prop('disabled' , true);
             const form = $('#frm_save_paygroupClear-'+ecode)[0];
             const data = new FormData(form);
             axios.post(url+'main/advance/savePayGroupClear' , data , {

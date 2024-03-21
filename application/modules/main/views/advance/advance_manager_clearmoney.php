@@ -167,6 +167,7 @@
 
         function saveManagerClear()
         {
+            $('#btn-saveManagerClear').prop('disabled' , true);
             const form = $('#frm-saveManagerClear')[0];
             const data = new FormData(form);
             axios.post(url+'main/advance/saveManagerClear' , data , {

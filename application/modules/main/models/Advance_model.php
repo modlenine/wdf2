@@ -1263,11 +1263,34 @@ class Advance_model extends CI_Model {
                         $statusText = "Wait Executive Group $group Approve";
     
                     }else if($countAppNow->num_rows() == $totalApprove){
+
+                        //update old status
+                        //Send to notifycenter
+                        $notifyformno = $formno;
+                        $notifyprogramname = "WDF";
+                        $notifystatus = "action done";
+                        $notifytype = "take action";
+
+                        $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                        //Send to notifycenter
+                        //update old status
     
                         $statusText = "Executive Group $group Approved";
                         $this->advemail->send_to_apExcutive($formcode , $formno);
                     }
                 }else if($checkApproveStatus == 0){
+
+                    //update old status
+                    //Send to notifycenter
+                    $notifyformno = $formno;
+                    $notifyprogramname = "WDF";
+                    $notifystatus = "action done";
+                    $notifytype = "take action";
+
+                    $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                    //Send to notifycenter
+                    //update old status
+                    
                     $statusText = "Executive Group $group Not Approve";
                 }
                 
@@ -1323,6 +1346,17 @@ class Advance_model extends CI_Model {
             $areaid = $this->input->post("check-apsec-areaid");
             $appGroup = $this->input->post("check-apsec-appGroup");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             $apApprove = $this->input->post("ip-apsec-appro");
@@ -1414,6 +1448,17 @@ class Advance_model extends CI_Model {
             $appGroup = $this->input->post("check-accsec-appGroup");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $accApprove = $this->input->post("ip-accSec-appro");
             $accStatus = "";
@@ -1503,6 +1548,17 @@ class Advance_model extends CI_Model {
             $appGroup = $this->input->post("check-fnsec-appGroup");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $fnApprove = $this->input->post("ip-fnSec-appro");
             $fnStatus = "";
@@ -1590,6 +1646,17 @@ class Advance_model extends CI_Model {
             $areaid = $this->input->post("check-userreceivesec-areaid");
             $appGroup = $this->input->post("check-userreceivesec-appGroup");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             
@@ -1767,6 +1834,17 @@ class Advance_model extends CI_Model {
             $areaid = $this->input->post("check-userClearSec-areaid");
             $appGroup = $this->input->post("check-userClearSec-appGroup");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             
@@ -2037,6 +2115,17 @@ class Advance_model extends CI_Model {
             $formno = conFormcodeToFormNo($formcode);
             $financeClearStatus = "";
             $fnc_stepcode = "";
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
             
             //Check stepcode
             $check_getRuncode = check_getRuningCode($formcode , $areaid , "adv" , "wdf_fnc_stepcode");
@@ -2168,6 +2257,17 @@ class Advance_model extends CI_Model {
             
             $fncMethod = $this->input->post("check-apClearSec-fncMethod");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             $apApprove = $this->input->post("ip-apClearSec-appro");
@@ -2322,6 +2422,17 @@ class Advance_model extends CI_Model {
             $fncMethod = $this->input->post("check-accClearSec-fncmethod");
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
+
             // Check status
             $accApprove = $this->input->post("ip-accClearSec-appro");
             $accStatus = "";
@@ -2441,6 +2552,17 @@ class Advance_model extends CI_Model {
             $mgrc_stepcode = getRuningCode(749);
             $formno = conFormcodeToFormNo($formcode);
             $appGroup = $this->input->post("check-mgrClearSec-appGroup");
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Save data to wdf_master table
             if($this->input->post("ip-mgrClearSec-appro") == "อนุมัติ"){
@@ -2723,6 +2845,17 @@ class Advance_model extends CI_Model {
                         $statusText = "Wait Executive Group $group Approve (Clear Money)";
     
                     }else if($countAppNow->num_rows() == $totalApprove){
+
+                        //update old status
+                        //Send to notifycenter
+                        $notifyformno = $formno;
+                        $notifyprogramname = "WDF";
+                        $notifystatus = "action done";
+                        $notifytype = "take action";
+
+                        $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+                        //Send to notifycenter
+                        //update old status
     
                         $statusText = "Executive Group $group Approved (Clear Money)";
                         if($appGroup == 4 || $appGroup == 3 || $appGroup == 2 || $appGroup == 1 || $appGroup == 0){
@@ -2816,6 +2949,16 @@ class Advance_model extends CI_Model {
             $fnc2_stepcode = "";
             $formno = conFormcodeToFormNo($formcode);
 
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             //Check stepcode
             $check_getRuncode = check_getRuningCode($formcode , $areaid , "adv" , "wdf_fnc2_stepcode");
@@ -2921,6 +3064,17 @@ class Advance_model extends CI_Model {
             $formcode = $this->input->post("check-userReceiveClearSec-formcode");
             $areaid = $this->input->post("check-userReceiveClearSec-areaid");
             $formno = conFormcodeToFormNo($formcode);
+
+            //update old status
+            //Send to notifycenter
+            $notifyformno = $formno;
+            $notifyprogramname = "WDF";
+            $notifystatus = "action done";
+            $notifytype = "take action";
+
+            $this->notifycenter->updatedataAction_template($notifyformno , $notifyprogramname , $notifystatus , $notifytype);
+            //Send to notifycenter
+            //update old status
 
             // Check status
             

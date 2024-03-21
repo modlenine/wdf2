@@ -143,7 +143,7 @@ class Notifycenter{
             // จัดการข้อผิดพลาด
         } else {
             // ดำเนินการต่อไปกับ response
-            echo $response;
+            // echo $response;
         }
 
         // ปิด cURL resource
@@ -186,7 +186,7 @@ class Notifycenter{
             // จัดการข้อผิดพลาด
         } else {
             // ดำเนินการต่อไปกับ response
-            echo $response;
+            // echo $response;
         }
 
         // ปิด cURL resource
@@ -229,7 +229,7 @@ class Notifycenter{
             // จัดการข้อผิดพลาด
         } else {
             // ดำเนินการต่อไปกับ response
-            echo $response;
+            // echo $response;
         }
 
         // ปิด cURL resource

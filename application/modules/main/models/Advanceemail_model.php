@@ -357,19 +357,40 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_ap_section");
    
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To AP Pay Group = 5
 
@@ -652,19 +673,40 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_ap_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To Excutive Pay Group = 4 , 3 , 2 , 1
 
@@ -800,19 +842,42 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_section");
    
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+
+
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To Account Pay Group = 5
 
@@ -976,19 +1041,42 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
+
       }
       // ส่ง Email To Account Pay Group = 4 , 3 , 2 , 1
 
@@ -1147,19 +1235,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance_section");
    
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Finance)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To Finance Pay Group = 5
 
@@ -1346,19 +1456,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Finance)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To Finance Pay Group = 4 , 3 , 2 , 1
 
@@ -1541,19 +1673,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
    
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_acc_BySection("u_userreceive_section");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['u_email'];
+            $ecodeccAr[] = $resultcc['u_ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้ร้องขอเซ็นรับเงิน";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
       
@@ -1764,19 +1918,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_acc_BySection("u_userreceive_section");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['u_email'];
+            $ecodeccAr[] = $resultcc['u_ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้ร้องขอเซ็นรับเงิน";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -1979,19 +2155,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
    
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้ร้องขอเคลียร์เงิน";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
       
@@ -2222,19 +2420,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
    
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้ร้องขอเคลียร์เงิน";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -2458,19 +2678,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Finance Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
       
@@ -2722,19 +2964,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Finance Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
       // FINANCE CLEAR
@@ -2985,19 +3249,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_ap_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -3277,19 +3563,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_ap_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -3564,19 +3872,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -3880,19 +4210,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -4189,19 +4541,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -4523,19 +4897,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -4864,19 +5260,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -5228,19 +5646,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_acc_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Assist Manager , Manager)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
       //// ACCOUNT CLEAR EMAIL SECTION ////
@@ -5538,21 +5978,40 @@ class Advanceemail_model extends CI_Model
    
          //  Email Zone
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
-
+         $ecodeccAr = array();
          $to = array();
+
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeccAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) เคลียร์เงินเสร็จสิ้น";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -5880,19 +6339,38 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeccAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeccAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) เคลียร์เงินเสร็จสิ้น";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -6212,19 +6690,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance2_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Finance2 Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -6570,19 +7070,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance2_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(Finance2 Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -6933,19 +7455,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance2_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) รอบัญชี(Finance2 Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -7323,19 +7867,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_finance2_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) รอบัญชี(Finance2 Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -7684,19 +8250,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_acc_BySection("u_finance2_clear_section");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['u_email'];
+            $ecodeccAr[] = $resultccAr['u_ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้ร้องขอเซ็นรับเงิน (Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -8067,19 +8655,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_acc_BySection("u_finance2_clear_section");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['u_email'];
+            $ecodeccAr[] = $resultcc['u_ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้ร้องขอเซ็นรับเงิน (Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -8453,19 +9063,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_acc_BySection("u_finance2_clear_section");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['u_email'];
+            $ecodeccAr[] = $resultcc['u_ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) รอผู้ร้องขอเซ็นรับเงิน (Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -8866,19 +9498,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_acc_BySection("u_finance2_clear_section");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['u_email'];
+            $ecodeccAr[] = $resultcc['u_ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) รอผู้ร้องขอเซ็นรับเงิน (Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
       // User receive money clear
@@ -9246,19 +9900,38 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeccAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeccAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) เคลียร์เงินเสร็จสิ้น";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -9649,19 +10322,38 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeccAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeccAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) เคลียร์เงินเสร็จสิ้น";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -10055,19 +10747,38 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeccAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeccAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) เคลียร์เงินเสร็จสิ้น";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -10488,19 +11199,38 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
 
          $to = array();
+         $ecodeccAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeccAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
          $cc = array();
+
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] รายการใบเบิกเงินทดรองจ่าย (Advance) เคลียร์เงินเสร็จสิ้น";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
       // User receive money clear
@@ -10755,19 +11485,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้จัดการอนุมัติ(Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -11047,19 +11799,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_manager($formcode , $formno , $emaildata->wdf_deptcode , $emaildata->wdf_areaid);
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['memberemail'];
+            $ecodeAr[] = $result['ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้จัดการอนุมัติ(Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -11335,19 +12109,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_ap_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -11651,19 +12447,41 @@ class Advanceemail_model extends CI_Model
          $optionTo = getEmail_acc_BySection("u_ap_clear_section");
 
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -11970,8 +12788,10 @@ class Advanceemail_model extends CI_Model
          //  Email Zone
          $optionTo = getDataAppUserClear($emaildata->wdf_appgroup_clear , $formcode , $emaildata->wdf_areaid);
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['apv_email'];
+            $ecodeAr[] = $result['apv_ecode'];
          }
    
    
@@ -11979,10 +12799,29 @@ class Advanceemail_model extends CI_Model
          $cc = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้บริหารกลุ่ม $emaildata->wdf_appgroup_clear อนุมัติ(Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -12256,19 +13095,41 @@ class Advanceemail_model extends CI_Model
          //  Email Zone
          $optionTo = getDataAppUserClear($emaildata->wdf_appgroup_clear , $formcode , $emaildata->wdf_areaid);
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['apv_email'];
+            $ecodeAr[] = $result['apv_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอผู้บริหารกลุ่ม $emaildata->wdf_appgroup_clear อนุมัติ(Clear)";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 5
 
@@ -12569,19 +13430,41 @@ class Advanceemail_model extends CI_Model
          //  Email Zone
          $optionTo = getEmail_acc_BySection("u_ap_clear_section");
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 
@@ -12912,19 +13795,41 @@ class Advanceemail_model extends CI_Model
          //  Email Zone
          $optionTo = getEmail_acc_BySection("u_ap_clear_section");
          $to = array();
+         $ecodeAr = array();
          foreach ($optionTo->result_array() as $result) {
             $to[] = $result['u_email'];
+            $ecodeAr[] = $result['u_ecode'];
          }
    
    
          $optioncc = getEmail_onMemberTbl("('$emaildata->wdf_ecode')");
          $cc = array();
+         $ecodeccAr = array();
          foreach ($optioncc->result_array() as $resultcc) {
             $cc[] = $resultcc['memberemail'];
+            $ecodeccAr[] = $resultcc['ecode'];
          }
+   
+         $to = array_unique($to);
+         $cc = array_unique($cc);
+         $ecodeAr = array_unique($ecodeAr);
+         $ecodeccAr = array_unique($ecodeccAr);
+
    
          emailSaveData($subject, $body, $to, $cc);
          //  Email Zone
+
+         // Notification center program
+         $ecodeActionArr = $ecodeAr;
+         $ecodeReadArr = $ecodeccAr;
+   
+         $title = "[$formno] มีรายการใบเบิกเงินทดรองจ่าย (Advance) ใหม่ รอบัญชี(AP Clear)ตรวจสอบ";
+         $status = $emaildata->wdf_status;
+         $link = base_url('advance_view.html/') . $formcode."/".$formno;
+         $programname = "WDF";
+   
+         $this->notifycenter->insertdataaction_template($ecodeActionArr , $title , $status , $link , $formno , $programname);
+         $this->notifycenter->insertdataRead_template($ecodeReadArr , $title , $status , $link , $formno , $programname);
       }
       // ส่ง Email To User Pay Group = 4 , 3 , 2 , 1
 

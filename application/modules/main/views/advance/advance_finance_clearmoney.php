@@ -133,6 +133,7 @@
 
         function saveFnClear()
         {
+            $('#btn-savefnClear').prop('disabled' , true);
             const form = $('#frm-savefnClear')[0];
             const data = new FormData(form);
 
