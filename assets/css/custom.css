@@ -1,0 +1,1269 @@
+
+.loader{ 
+	position: fixed; 
+    top: 0; 
+    left: 0; 
+	width:100%; 
+	height:100%; 
+	overflow:hidden; 
+	background-color:rgba(0, 0, 0, 0.767); 
+	z-index: 999; 
+} 
+.loader>div{ 
+	height:100px; 
+	width:100px; 
+	border:15px solid #45474b; 
+	border-top-color:#2a88e6; 
+	position:absolute; 
+	margin:auto; 
+	top:0; 
+	bottom:0; 
+	left:0; 
+	right:0; 
+	border-radius:50%; 
+	animation:spin 1.5s infinite linear; 
+}
+@keyframes spin{ 
+	100%{ 
+		transform:rotate(360deg); 
+	} 
+}
+
+
+.left-side-bar{
+    background-color:#ffffff !important;
+}
+.mtext{
+	color:rgb(38, 37, 37) !important;
+	font-size:14px;
+}
+.wdfI1{
+	color:#208bef !important;
+}
+.hicon{
+	color:rgb(38, 37, 37) !important;
+}
+.wdfI2{
+	color:#ef476f !important;
+}
+.wdfI3{
+	color:#f4ae2b !important;
+}
+.wdfI4{
+	color:#03ad03 !important;
+}
+.dropdown-divider{
+	border-color: rgba(137, 137, 137, 0.2) !important;
+}
+
+.btn{
+	border-radius: 18px !important;
+}
+.btn-primary{
+    background-color:#141E61 !important;
+    border-color:#141E61 !important;
+}
+.btn-primary:hover{
+    background-color:#3c5ba1 !important;
+    border-color:#3c5ba1 !important;
+}
+.btn-secondary{
+    background-color:#787A91 !important;
+    border-color:#787A91 !important;
+}
+.btn-secondary:hover{
+    background-color:#6aaebe !important;
+    border-color:#6aaebe !important;
+}
+.btn-success{
+	background-color: #129631 !important;
+	border-color:#129631 !important;
+}
+.btn-danger{
+	background-color: #CC0000 !important;
+	border-color:#CC0000 !important;
+}
+.btn-success:hover{
+	background-color: #0b8b29 !important;
+	border-color: #0b8b29 !important;
+}
+.btn-danger:hover{
+	background-color: #a10404 !important;
+	border-color:#a10404 !important;
+}
+.btn-warning {
+    color: #212529;
+    background-color: #e9b417;
+    border-color: #e9b417;
+}
+
+.textRequest{
+    color:#e20707;
+    font-weight:600;
+}
+
+.inputNull{
+	border:2px solid #e20707;
+	color:#e20707 !important;
+}
+.inputNull:focus , .inputNull:active{
+	border:2px solid #e20707;
+	color:#e20707 !important;
+}
+
+.inputNull2{
+	border:2px solid #e20707;
+	color:#e20707 !important;
+}
+.inputNull2:focus , .inputNull2:active{
+	border:2px solid #e20707;
+	color:#e20707 !important;
+}
+
+.inputNullWarning{
+	border:2px solid #e28a07;
+	color:#e28a07 !important;
+}
+.inputNullWarning:focus , .inputNullWarning:active{
+	border:2px solid #e28a07;
+	color:#e28a07 !important;
+}
+
+.inputSuccess{
+	border:2px solid #00c921;
+	color:#00c921 !important;
+}
+.inputSuccess:focus , .inputSuccess:active{
+	border:2px solid #00c921;
+	color:#00c921 !important;
+}
+
+.btnIndex{
+	width:150px;
+}
+
+.dataTables_filter{
+	display:none !important;
+}
+
+
+/* 
+###########################################################
+Control accode table And Accode Page
+###########################################################
+*/
+#accode_data{
+	width:100% !important;
+}
+
+#currency_data{
+	width:100% !important;
+}
+
+#accodeM_data{
+	width:100% !important;
+}
+
+.accodeDataUl{
+	max-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.accodeDataLi:hover{
+	cursor:pointer;
+}
+
+.delAccode{
+	font-size:20px;
+	color:#CC0000;
+	transition:transform .2s;
+}
+.delAccode:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#eb2929;
+}
+
+.editAccode{
+	font-size:20px;
+	color:#088fdd;
+	transition:transform .2s;
+}
+.editAccode:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#2edef5;
+}
+
+
+.delCurrency{
+	font-size:20px;
+	color:#CC0000;
+	transition:transform .2s;
+}
+.delCurrency:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#eb2929;
+}
+
+.editCurrency{
+	font-size:20px;
+	color:#088fdd;
+	transition:transform .2s;
+}
+.editCurrency:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#2edef5;
+}
+
+
+.delAccodeM{
+	font-size:20px;
+	color:#CC0000;
+	transition:transform .2s;
+}
+.delAccodeM:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#eb2929;
+}
+
+.editAccodeM{
+	font-size:20px;
+	color:#088fdd;
+	transition:transform .2s;
+}
+.editAccodeM:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#2edef5;
+}
+
+
+@media (min-width:1024px) and (max-width:1439px){
+	
+}
+
+@media (min-width:768px) and (max-width:1023px){
+	#accode_data{
+		width:800px !important;
+	}
+
+	#accodeM_data{
+		width:800px !important;
+	}
+}
+
+@media (min-width:320px) and (max-width:767px) {
+	#accode_data{
+		width:800px !important;
+	}
+
+	#accodeM_data{
+		width:800px !important;
+	}
+
+	#btn_add_accode{
+		width:100% !important;
+	}
+}
+
+/* 
+###########################################################
+Control accode table 
+###########################################################
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+###########################################################
+Control Advance Page
+###########################################################
+*/
+.advHr{
+	background-color:#3399FF !important;
+	border-color:#3399FF !important;
+	height:3px;
+}
+
+.norHr{
+	background-color:#fb1eb5 !important;
+	border-color:#fb1eb5 !important;
+	height:3px;
+}
+
+.salHr{
+	background-color:#f4ae2b !important;
+	border-color:#f4ae2b !important;
+	height:3px;
+}
+
+.poHr{
+	background-color:#03ad03 !important;
+	border-color:#03ad03 !important;
+	height:3px;
+}
+
+.advAddDetail{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.advAddDetail:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+.advAddDetaile{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.advAddDetaile:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+
+.advAddDetailClear{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.advAddDetailClear:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+.advAddDetailClear{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.advAddDetailClear:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+
+.norAddDetaile{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.norAddDetaile:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.btnEditDept{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btnEditDept:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.btnEditDept-clear{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btnEditDept-clear:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+
+.nor-btnEditDept{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.nor-btnEditDept:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.btneEditDept{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btneEditDept:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.selectAcCodeListUl{
+	max-height: 250px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.selectAcCodeListLi:hover{
+	cursor:pointer;
+}
+.selectAcCodeListeLi:hover{
+	cursor:pointer;
+}
+
+.selectUserUl{
+	max-height: 250px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.selectUserLi:hover{
+	cursor:pointer;
+}
+
+.del-detailList{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailList:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-detailList-clear{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailList-clear:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-detailList-nor{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailList-nor:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-detailListe{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailListe:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-nor-detailListe{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-nor-detailListe:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-file-edit{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.del-file-edit:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-file-fn-po{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.del-file-fn-po:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+#btn-saveAdvanceData{
+	width:250px;
+	height:50px;
+}
+
+#advance_list{
+	width:100% !important;
+}
+
+#userpermission_list{
+	width:100% !important;
+}
+
+.advl-th1{
+	width: 100px !important;
+}
+.advl-th2{
+	width: 80px !important;
+}
+.advl-th3{
+	width: 150px !important;
+}
+.advl-th4{
+	width: 80px !important;
+}
+.advl-th5{
+	width: 80px !important;
+}
+/* .advl-th6{
+	width: 150px !important;
+} */
+.advl-th7{
+	width: 80px !important;
+}
+
+.bgBath{
+	background-color: #d1d1d6 !important;
+}
+
+.divImage{
+	position:relative;
+}
+
+#canvas_sign{
+	width:480px;
+	height:300px;
+}
+
+.imageM{
+	position:relative;
+}
+
+.delclear-file-edit{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.delclear-file-edit:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+
+@media (min-width:1024px) and (max-width:1439px){
+	#advance_list{
+		width:1300px !important;
+	}
+}
+
+@media (min-width:768px) and (max-width:1023px){
+	#canvas_sign{
+		width:310px !important;
+		height:300px !important;
+	}
+	#advance_list{
+		width:1200px !important;
+	}
+}
+
+@media (min-width:320px) and (max-width:767px) {
+	#canvas_sign{
+		width:250px !important;
+		height:300px !important;
+	}
+}
+
+.conditionText{
+	color:#ef0038;
+	font-size:14px;
+}
+
+
+/* 
+###########################################################
+Control Advance Page
+###########################################################
+*/
+
+
+
+
+
+/*######################################################## 
+Control check budget section 
+#########################################################*/
+.btnSaveBg{
+	width:200px;
+	height:50px;
+}
+/*######################################################## 
+Control check budget section 
+#########################################################*/
+
+
+
+/*######################################################## 
+Control check Manager section 
+#########################################################*/
+
+/*######################################################## 
+Control check Manager section 
+#########################################################*/
+
+
+
+
+
+
+/* 
+###########################################################
+Control Normal Page
+###########################################################
+*/
+.wdfHr{
+	background-color:#e346bf !important;
+	border-color:#e346bf !important;
+	height:3px;
+}
+
+.norAddDetail{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.norAddDetail:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+.advAddDetaile{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.advAddDetaile:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+.btnEditDept-nor{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btnEditDept-nor:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.btneEditDept{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btneEditDept:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.btneEditDept_nor{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btneEditDept_nor:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.selectAcCodeListUl-nor{
+	max-height: 250px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.selectAcCodeListLi-nor:hover{
+	cursor:pointer;
+}
+
+.del-detailList{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailList:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-detailListe{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailListe:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-file-edit{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.del-file-edit:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-file-edit-nor{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.del-file-edit-nor:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+#btn-saveAdvanceData{
+	width:250px;
+	height:50px;
+}
+
+#normal_list{
+	width:100% !important;
+}
+
+.norl-th1{
+	width: 100px !important;
+}
+.norl-th2{
+	width: 80px !important;
+}
+.norl-th3{
+	width: 150px !important;
+}
+.norl-th4{
+	width: 80px !important;
+}
+.norl-th5{
+	width: 80px !important;
+}
+/* .advl-th6{
+	width: 150px !important;
+} */
+.norl-th7{
+	width: 80px !important;
+}
+
+.bgBath{
+	background-color: #d1d1d6 !important;
+}
+
+.divImage{
+	position:relative;
+}
+
+#canvas_sign{
+	width:480px;
+	height:300px;
+}
+
+.imageM{
+	position:relative;
+}
+
+.delclear-file-edit{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.delclear-file-edit:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+
+@media (min-width:1024px) and (max-width:1439px){
+	#normal_list{
+		width:1300px !important;
+	}
+}
+
+@media (min-width:768px) and (max-width:1023px){
+	#canvas_sign{
+		width:310px !important;
+		height:300px !important;
+	}
+	#normal_list{
+		width:1200px !important;
+	}
+}
+
+@media (min-width:320px) and (max-width:767px) {
+	#canvas_sign{
+		width:250px !important;
+		height:300px !important;
+	}
+}
+
+
+/* 
+###########################################################
+Control Normal Page
+###########################################################
+*/
+
+
+
+
+
+
+
+/* 
+###########################################################
+Control Salary Page
+###########################################################
+*/
+#salary_list{
+	width:100% !important;
+}
+
+.salAddDetail{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.salAddDetail:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.sal-btnEditDept{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.sal-btnEditDept:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-detailList-sal{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailList-sal:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.salAddDetaile{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.salAddDetaile:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-sal-detailListe{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-sal-detailListe:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-file-edit-sal{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.del-file-edit-sal:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.btneEditDept_sal{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btneEditDept_sal:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+@media (min-width:1024px) and (max-width:1439px){
+	#salary_list{
+		width:1300px !important;
+	}
+}
+
+@media (min-width:768px) and (max-width:1023px){
+	#salary_list{
+		width:1200px !important;
+	}
+}
+
+@media (min-width:320px) and (max-width:767px) {
+	
+}
+
+/* 
+###########################################################
+Control Salary Page
+###########################################################
+*/
+
+
+
+
+
+/* 
+###########################################################
+Control PO Page
+###########################################################
+*/
+#po_list{
+	width:100% !important;
+}
+
+.poAddDetail{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.poAddDetail:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.po-btnEditDept{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.po-btnEditDept:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-detailList-po{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-detailList-po:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.poAddDetaile{
+	font-size:26px;
+	color:#00c921;
+	transition:transform .2s;
+	margin-bottom:10px;
+}
+.poAddDetaile:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-po-detailListe{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+}
+.del-po-detailListe:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.del-file-edit-po{
+	color:#CC0000;
+	font-size:24px;
+	transition:transform .2s;
+	position:absolute;
+	top:5px;
+	left:20px;
+	background-color:#00000035;
+	padding:5px;
+}
+.del-file-edit-po:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+.btneEditDept_po{
+	font-size:24px;
+	margin-left:5px;
+	transition:transform .2s;
+	color:#FF9900;
+}
+.btneEditDept_po:hover{
+	transform:scale(1.2);
+	cursor:pointer;
+}
+
+@media (min-width:1024px) and (max-width:1439px){
+	#po_list{
+		width:1400px !important;
+	}
+}
+
+@media (min-width:768px) and (max-width:1023px){
+	#po_list{
+		width:1300px !important;
+	}
+}
+
+@media (min-width:320px) and (max-width:767px) {
+	
+}
+
+/* 
+###########################################################
+Control PO Page
+###########################################################
+*/
+
+
+
+
+/* Control user page */
+.delUser{
+	font-size:20px;
+	color:#CC0000;
+	transition:transform .2s;
+}
+.delUser:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#eb2929;
+}
+
+.editUser{
+	font-size:20px;
+	color:#088fdd;
+	transition:transform .2s;
+}
+.editUser:hover{
+	cursor:pointer;
+	transform:scale(1.1);
+	color:#2edef5;
+}
+
+.countNotify{
+	position:absolute;
+	left:-6px !important;
+	top:2px;
+	color:#ffffff !important;
+	font-size:14px;
+	background-color:#CC0000;
+	padding:5px;
+	width:20px;
+	height:20px;
+	border-radius: 45px;
+}
+/* .countNotifyText{
+	text-align:center;
+} */
+
+
+
+/* Control data table  */
+.buttons-html5{
+	padding:5px !important;
+	border-radius: 18px !important;
+	background-color: #129631 !important;
+	border-color:#129631 !important;
+	width:80px;
+	color:#fff;
+}
+
+.buttons-html5:hover{
+	background-color: #36e25e !important;
+	border-color:#36e25e !important;
+	color:#212529;
+}
+
+
+/* Control Dashboard */
+.badge-adv{
+	color:#ffffff;
+	background-color:#3399FF;
+}
+
+.badge-wdf{
+	color:#ffffff;
+	background-color:#fb1eb5;
+}
+
+.badge-sal{
+	color:#ffffff;
+	background-color:#f4ae2b;
+}
+.badge-po{
+	color:#ffffff;
+	background-color:#03ad03;
+}
+
+
+
+
+.home-ul-adv{
+	max-height: 400px;
+	min-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.home-ul-nor{
+	max-height: 400px;
+	min-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.home-ul-sal{
+	max-height: 400px;
+	min-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.home-ul-po{
+	max-height: 400px;
+	min-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.home-sec1{
+	min-height: 700px !important;
+}
+
+
+/* Upgrade software */
+.selectVendorListUl{
+	max-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.selectVendorListLi:hover{
+	cursor: pointer;
+}
+
+.selectVendorListUlEdit{
+	max-height: 200px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.selectVendorListLiEdit:hover{
+	cursor: pointer;
+}
+
+
+.poDataListUl{
+	min-height: 400px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.poDataListLi:hover{
+	cursor: pointer;
+}
+
+.poDataListUlEdit{
+	min-height: 400px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.poDataListLiEdit:hover{
+	cursor: pointer;
+}
+
+
+
+
+
