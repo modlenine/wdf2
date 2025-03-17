@@ -852,27 +852,23 @@ class Normal_model extends CI_Model {
     private function getUserGroup_nor($approveGroup , $areaidGroup , $userDeptCode)
     {
         if($approveGroup != "" && $areaidGroup != ""){
-            $sqlGroupOnlyGroup4 ="";
+            $sqlOnlyGroup4 ="";
             if($areaidGroup == "tb"){
-                if(getUser()->ecode == "M2076" || getUser()->ecode == "M2222"){
-                    if($approveGroup == 4){
-                        $sqlGroupOnlyGroup4 = "AND app_ecode NOT IN ('M2076' , 'M2222')";
-                    }else{
-                        $sqlGroupOnlyGroup4 ="";
-                    }
-
-                }else if(getUser()->ecode == "M0051"){
-                    if($approveGroup == 4){
-                        $sqlGroupOnlyGroup4 = "AND app_ecode NOT IN ('M0051')";
-                    }else{
-                        $sqlGroupOnlyGroup4 ="";
-                    }
+                $ecodeManagerLogin = getUser()->ecode;
+                if($approveGroup == 4){
+                    if($ecodeManagerLogin == "M2222" || $ecodeManagerLogin == "M2076"){
+                        $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 1' "; 
+                    }else if($ecodeManagerLogin == "M0051" || $ecodeManagerLogin == "M1809"){
+                        $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 2' "; 
+                    } 
+                }else{
+                    $sqlOnlyGroup4 = "";
                 }
             }else{
                 if($approveGroup == 4){
-                    $sqlGroupOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
+                    $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
                 }else{
-                    $sqlGroupOnlyGroup4 = "";
+                    $sqlOnlyGroup4 = "";
                 }
             }
             
@@ -886,7 +882,7 @@ class Normal_model extends CI_Model {
             app_deptcode2,
             app_deptcode3
             FROM approve_group
-            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlGroupOnlyGroup4 GROUP BY app_posiname ORDER BY app_group_order ASC
+            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlOnlyGroup4 GROUP BY app_posiname ORDER BY app_group_order ASC
             ");
             return $sql;
         }
@@ -941,7 +937,7 @@ class Normal_model extends CI_Model {
             app_deptcode2,
             app_deptcode3
             FROM approve_group
-            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlOnlyGroup4 $mgr2ForSt ORDER BY app_group_order ASC
+            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlOnlyGroup4 $mgr2ForSt ORDER BY app_group_order ASC , app_user ASC
             ");
             return $sqlUserInGroup;
         }

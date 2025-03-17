@@ -567,7 +567,8 @@
                     if(doc_deptcode == userdeptcode && userposi > 55){
                         $('#manager_section_nor').css('display' , '');
                         checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963"){
+                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963" || areaid == "tb" && userecode == "M0025"){
+                        //Section ของผู้จัดการ TB เปิดให้พี่นิตสามารถเข้าไปอนุมัติได้ 
                         $('#manager_section_nor').css('display' , '');
                         checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
                     }else if(doc_deptcode == '1007'){

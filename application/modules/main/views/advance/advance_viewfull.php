@@ -600,8 +600,15 @@
                     }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963"){
                         $('#manager_section').css('display' , '');
                         checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                    }else if(doc_deptcode == '1007' || doc_deptcode == '1010'){
+                    }else if(doc_deptcode == '1007'){
+                        //ปรับเงื่อนไขการอนุมัติให้พี่หนุ่มอนุมัติแค่ของ Production 17-03-2025
                         if(userecode == "M0040" || userecode == "M0506"){
+                            $('#manager_section').css('display' , '');
+                            checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                        }
+                    }else if(doc_deptcode == '1010'){
+                        //ปรับเงื่อนไขการอนุมัติให่พี่นิตอนุมัติ CS & PLANING 17-03-2025
+                        if(userecode == "M0025"){
                             $('#manager_section').css('display' , '');
                             checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
                         }
