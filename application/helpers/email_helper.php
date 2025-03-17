@@ -104,15 +104,15 @@ function emailSaveData($subject , $body ,$to , $cc)
     '.$body;
     
 
-    // if($_SERVER['HTTP_HOST'] != "localhost"){
-    //     if(!$mail->send()){
-    //         emailSaveData2($subject , $body ,$to , $cc);
-    //     }
-    // }
-
-    if(!$mail->send()){
-        emailSaveData2($subject , $body ,$to , $cc);
+    if($_SERVER['HTTP_HOST'] != "localhost"){
+        if(!$mail->send()){
+            emailSaveData2($subject , $body ,$to , $cc);
+        }
     }
+
+    // if(!$mail->send()){
+    //     emailSaveData2($subject , $body ,$to , $cc);
+    // }
 
     // $mail->send();
 }
@@ -714,87 +714,64 @@ function getEmail_onMemberTbl($ecode)
     }
 }
 
-// function getEmail_manager($formcode , $formno , $userdeptcode , $areaid)
-// {
-//     emailobj()->db2 = emailobj()->load->database('saleecolour', TRUE);
-//     if($areaid != "tb"){
-
-//         $sql = emailobj()->db2->query("SELECT
-//         memberemail,
-//         ecode
-//         FROM member
-//         WHERE DeptCode = '$userdeptcode' AND posi in (55,75) AND resigned != 1
-//         ");
-
-//         if($sql->num_rows() != 0){
-//             return $sql;
-//         }
-//     }else if($userdeptcode == 1007){
-//         $sql = emailobj()->db2->query("SELECT
-//         memberemail,
-//         ecode
-//         FROM member
-//         WHERE ecode IN ('M0506' , 'M0040') AND resigned != 1
-//         ");
-
-//         if($sql->num_rows() != 0){
-//             return $sql;
-//         }
-//     }else{
-//         $sql = emailobj()->db2->query("SELECT
-//         memberemail,
-//         ecode
-//         FROM member
-//         WHERE ecode = 'M0051'
-//         ");
-
-//         if($sql->num_rows() != 0){
-//             return $sql;
-//         }
-//     }
-// }
-
 function getEmail_manager($formcode , $formno , $userdeptcode , $areaid)
 {
     $userareaid = getUser()->areaid;
     emailobj()->db2 = emailobj()->load->database('saleecolour', TRUE);
-    if($areaid != "tb"){
-        if($userdeptcode != 1007){
-            if($areaid == "st"){
-                $sql = emailobj()->db2->query("SELECT
-                memberemail,
-                ecode
-                FROM member
-                WHERE ecode IN ('M0025') AND resigned != 1
-                ");
-        
-                if($sql->num_rows() != 0){
-                    return $sql;
-                }
-            }else if($userdeptcode == 1015 || $userdeptcode == 1014){//เพิ่มสิทธิ์ของ ผจก Lab ที่ควบ 2 แผนก
-                $sql = emailobj()->db2->query("SELECT
-                memberemail,
-                ecode
-                FROM member
-                WHERE DeptCode = '$userdeptcode' AND posi in (55,65,75) OR ecode = 'M0112' AND resigned != 1
-                ");
-    
-                if($sql->num_rows() != 0){
-                    return $sql;
-                }
-            }else{
-                $sql = emailobj()->db2->query("SELECT
-                memberemail,
-                ecode
-                FROM member
-                WHERE DeptCode = '$userdeptcode' AND posi in (55,65,75) AND resigned != 1
-                ");
-    
-                if($sql->num_rows() != 0){
-                    return $sql;
-                }
+
+    if($areaid == "tb"){
+        //ถ้าเป็น TB ให้ส่ง Email หาพี่พลก่อนเสมอ โดยของ TB พี่ภพขอรับทราบรายการบางรายการของ TB
+        $sql = emailobj()->db2->query("SELECT
+        memberemail,
+        ecode
+        FROM member
+        WHERE ecode IN ('M0051','M0963')
+        ");
+
+        if($sql->num_rows() != 0){
+            return $sql;
+        }
+    }else if($areaid == "st"){
+        $sql = emailobj()->db2->query("SELECT
+        memberemail,
+        ecode
+        FROM member
+        WHERE ecode IN ('M0025') AND resigned != 1
+        ");
+        //ถ้าเป็น ST ให้ส่งไปหาพี่นิต
+
+        if($sql->num_rows() != 0){
+            return $sql;
+        }
+    }else{
+        //ถ้าเป็น SC
+        if($userdeptcode == 1015 || $userdeptcode == 1014){
+            //เพิ่มสิทธิ์ของ ผจก Lab ที่ควบ 2 แผนก
+            $sql = emailobj()->db2->query("SELECT
+            memberemail,
+            ecode
+            FROM member
+            WHERE DeptCode = '$userdeptcode' AND posi in (55,65,75) OR ecode = 'M0112' AND resigned != 1
+            ");
+            //ของ Lab ส่งไปหาพี่ยูง
+
+            if($sql->num_rows() != 0){
+                return $sql;
             }
-        }else{
+        }else if($userdeptcode == 1010){
+            $sql = emailobj()->db2->query("SELECT
+            memberemail,
+            ecode
+            FROM member
+            WHERE ecode IN ('M0025') AND resigned != 1
+            ");
+            //ถ้าเป็น CS PLANING ส่งไปหาพี่นิต
+    
+            if($sql->num_rows() != 0){
+                return $sql;
+            }
+        }else if($userdeptcode == 1007){
+            //ถ้าเป็น Production ส่งไปหาพี่หนุ่มพี่แบงค์
             $sql = emailobj()->db2->query("SELECT
             memberemail,
             ecode
@@ -805,57 +782,18 @@ function getEmail_manager($formcode , $formno , $userdeptcode , $areaid)
             if($sql->num_rows() != 0){
                 return $sql;
             }
-        }
-
-    }else if($userdeptcode == 1007){
-
-        if($areaid != "tb"){
-            if($areaid != "st"){
-                $sql = emailobj()->db2->query("SELECT
-                memberemail,
-                ecode
-                FROM member
-                WHERE ecode IN ('M0506' , 'M0040') AND resigned != 1
-                ");
-        
-                if($sql->num_rows() != 0){
-                    return $sql;
-                }
-            }else if($areaid == "st"){
-                $sql = emailobj()->db2->query("SELECT
-                memberemail,
-                ecode
-                FROM member
-                WHERE ecode IN ('M0025') AND resigned != 1
-                ");
-        
-                if($sql->num_rows() != 0){
-                    return $sql;
-                }
-            }
         }else{
             $sql = emailobj()->db2->query("SELECT
             memberemail,
             ecode
             FROM member
-            WHERE ecode = 'M0051'
+            WHERE DeptCode = '$userdeptcode' AND posi in (55,65,75) AND resigned != 1
             ");
-    
+            //นอกเหนือจากนั้นส่งไปหา ผจก ตามสิทธิ์ของโปรแกรม user management
+
             if($sql->num_rows() != 0){
                 return $sql;
             }
-        }
-
-    }else{
-        $sql = emailobj()->db2->query("SELECT
-        memberemail,
-        ecode
-        FROM member
-        WHERE ecode IN ('M0051','M0963')
-        ");
-
-        if($sql->num_rows() != 0){
-            return $sql;
         }
     }
 }

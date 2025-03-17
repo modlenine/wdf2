@@ -570,8 +570,13 @@
                     }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963"){
                         $('#manager_section_nor').css('display' , '');
                         checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                    }else if(doc_deptcode == '1007' || doc_deptcode == '1010'){
+                    }else if(doc_deptcode == '1007'){
                         if(userecode == "M0040" || userecode == "M0506"){
+                            $('#manager_section_nor').css('display' , '');
+                            checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                        }
+                    }else if(doc_deptcode == '1010'){
+                        if(userecode == "M0025"){
                             $('#manager_section_nor').css('display' , '');
                             checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
                         }
@@ -1217,6 +1222,7 @@
                     areaid:areaid
                 }).then(res=>{
                     console.log(res.data);
+                    //การแสดงผลของตัวเลือก ผู้จัดการคนที่สองโดนล็อคด้วยรหัสแผนก 
                     if(res.data.status == "Select Data Success"){
                         let check_userecode = "<?php echo getUser()->ecode; ?>";
                         if(approveGroup != 5){
@@ -1627,12 +1633,8 @@
 
                                     }
 
-                                    
-
                                     console.log(checkboxCount);
 
-
-                                    
                                     $('#check-mg-clickLength-nor').val(checkboxCount);
 
                                     if(checkboxCount > appNumber){
@@ -1746,8 +1748,6 @@
             }
         }
 
-
-
         function getData_ManagerApproved_nor(formcode , areaid)
         {
             if(formcode != "" && areaid != ""){
@@ -1762,95 +1762,108 @@
                         let approveGroup = res.data.approveGroup;
                         let mgrApproveData = res.data.mgrApproveData;
 
-                        if(mgrApproveData.wdf_mgr_appr == "อนุมัติ"){
-
-                            if(approveGroup != 5){
-                                $('.lineMgrApp_nor').css('display' , '');
+                        if (mgrApproveData.wdf_mgr_appr == "อนุมัติ") {
+                            if (approveGroup != 5) {
+                                $('.lineMgrApp_nor').css('display', '');
                                 let appGroup = res.data.appGroup;
                                 let appGroupDetail = res.data.appGroupDetail;
                                 let userApproved = res.data.userApproved;
-                                
-                                let htmlPay = ``;
-                                let appNumber = null;
 
-                                let htmlg1 = `
-                                    <div class="col-md-12 form-group">
-                                `;
-                                    for(let i = 0 ; i < appGroup.length; i++){
-                                        appNumber = appGroup[i].app_number;
-                                        $('#check-mg-totalLength-nor').val(appNumber);
-                                        htmlg1 +=`
-                                        <label><b>`+appGroup[i].app_posiname+`</b></label>
-                                        <div class="row">
-                                            <div class="col-lg-12 form-inline">`;
+                                let htmlg1 = `<div class="col-md-12 form-group">`;
 
-                                            for(let ii = 0; ii < appGroupDetail.length; ii++){
-                                                let checkedData = '';
-                                                if(appGroup[i].app_posiname == appGroupDetail[ii].app_posiname){
+                                for (let i = 0; i < appGroup.length; i++) {
+                                    let appNumber = appGroup[i].app_number;
+                                    $('#check-mg-totalLength-nor').val(appNumber);
 
-                                                    for(let iii = 0; iii < userApproved.length; iii++){
-                                                        if(appGroupDetail[ii].app_ecode == userApproved[iii].apv_ecode){
-                                                            checkedData = 'checked';
-                                                        }
-                                                    }
+                                    htmlg1 += `
+                                    <label><b>${appGroup[i].app_posiname}</b></label>
+                                    <div class="row">
+                                        <div class="col-lg-12 form-inline">`;
 
-                                                    htmlg1 +=`
-                                                    <div class="custom-control custom-checkbox mb-5 ml-3">
-                                                        <input type="checkbox" id="ipv-nor-appgd-`+appGroupDetail[ii].app_autoid+`" name="ipv-nor-appgd[]" class="custom-control-input cbGroupDetail_nor" `+checkedData+`>
+                                    let mergedData = [];
 
-                                                        <label for="ipv-nor-appgd-`+appGroupDetail[ii].app_autoid+`" class="custom-control-label"><b>`+appGroupDetail[ii].app_user+`</b></label>
-                                                    </div>
+                                    // 1️⃣ ดึงข้อมูลจาก `appGroupDetail` ที่ตรงกับตำแหน่งนี้ก่อน
+                                    for (let ii = 0; ii < appGroupDetail.length; ii++) {
+                                        let checkedData = '';
 
-                                                    `;
+                                        if (appGroup[i].app_posiname == appGroupDetail[ii].app_posiname) {
+                                            for (let iii = 0; iii < userApproved.length; iii++) {
+                                                if (appGroupDetail[ii].app_ecode == userApproved[iii].apv_ecode) {
+                                                    checkedData = 'checked';
                                                 }
-                                            }   
+                                            }
 
-                                        htmlg1 +=`
-                                            </div>
-                                        </div>
-                                        `;
+                                            mergedData.push({
+                                                autoid: appGroupDetail[ii].app_autoid,
+                                                ecode: appGroupDetail[ii].app_ecode,
+                                                user: appGroupDetail[ii].app_user,
+                                                checked: checkedData
+                                            });
+                                        }
                                     }
 
-                                    htmlg1 +=`
-                                    </div>
-                                    `;
+                                    // 2️⃣ เช็คว่ามีค่าใน `userApproved` ที่ไม่มีอยู่ใน `appGroupDetail` หรือไม่ (แต่ต้องเป็นตำแหน่งเดียวกัน)
+                                    for (let iii = 0; iii < userApproved.length; iii++) {
+                                        let isEcodeExists = mergedData.some(detail => detail.ecode === userApproved[iii].apv_ecode);
+                                        
+                                        if (!isEcodeExists && appGroup[i].app_posiname == userApproved[iii].apv_posiname) {
+                                            // เพิ่มเฉพาะค่าที่ตรงกับตำแหน่ง (app_posiname) เท่านั้น
+                                            mergedData.push({
+                                                autoid: userApproved[iii].apv_autoid,
+                                                ecode: userApproved[iii].apv_ecode,
+                                                user: userApproved[iii].apv_user,
+                                                checked: 'checked'
+                                            });
+                                        }
+                                    }
 
-                                let condition = getConditionTextByGroup_nor(approveGroup , areaid);
-                                    htmlg1 +=`
-                                    <div class="col-md-12 form-group">
-                                        <span class="conditionText">`+condition+`</span>
-                                    </div>
-                                    `;
-                                    
-                                    $('#mainG-1-nor').html(htmlg1);
+                                    // 3️⃣ แสดงผลจาก `mergedData`
+                                    for (let data of mergedData) {
+                                        htmlg1 += `
+                                        <div class="custom-control custom-checkbox mb-5 ml-3">
+                                            <input type="checkbox" id="ipv-nor-appgd-${data.autoid}" name="ipv-nor-appgd[]" class="custom-control-input cbGroupDetail_nor" ${data.checked}>
+                                            <label for="ipv-nor-appgd-${data.autoid}" class="custom-control-label"><b>${data.user}</b></label>
+                                        </div>`;
+                                    }
 
-                                    $('input:checkbox[name="ipv-nor-appgd[]"]').on('click' , function(e){
-                                        e.preventDefault();
-                                    });
+                                    htmlg1 += `</div></div>`;
+                                }
 
+                                htmlg1 += `</div>`;
 
-                                    getSectionGroup_4_to_0_nor(approveGroup , userApproved , formcode , areaid , mgrApproveData.wdf_status);
+                                let condition = getConditionTextByGroup_nor(approveGroup, areaid);
+                                htmlg1 += `
+                                <div class="col-md-12 form-group">
+                                    <span class="conditionText">${condition}</span>
+                                </div>`;
+
+                                $('#mainG-1-nor').html(htmlg1);
+
+                                $('input:checkbox[name="ipv-nor-appgd[]"]').on('click', function (e) {
+                                    e.preventDefault();
+                                });
+
+                                getSectionGroup_4_to_0_nor(approveGroup, userApproved, formcode, areaid, mgrApproveData.wdf_status);
                             }
-
                         }
 
-
-                        $('input:radio[name="ip-nor-mgrsec-appro"]').on('click' , function(e){
+                        $('input:radio[name="ip-nor-mgrsec-appro"]').on('click', function (e) {
                             e.preventDefault();
                         });
 
-                        if(mgrApproveData.wdf_mgr_appr == "อนุมัติ"){
-                            $('#ip-nor-mgrsec-appro-yes').prop('checked' , true);
-                        }else{
-                            $('#ip-nor-mgrsec-appro-no').prop('checked' , true);
+                        if (mgrApproveData.wdf_mgr_appr == "อนุมัติ") {
+                            $('#ip-nor-mgrsec-appro-yes').prop('checked', true);
+                        } else {
+                            $('#ip-nor-mgrsec-appro-no').prop('checked', true);
                         }
 
                         let condateMgr = moment(mgrApproveData.wdf_mgr_datetime).format('DD/MM/Y HH:mm:ss');
-                        $('#ip-nor-mgrsec-userpost').val(mgrApproveData.wdf_mgr_user).prop('readonly' , true);
-                        $('#ip-nor-mgrsec-deptpost').val(mgrApproveData.wdf_mgr_dept).prop('readonly' , true);
-                        $('#ip-nor-mgrsec-datepost').val(condateMgr).prop('readonly' , true);
-                        $('#ip-nor-mgrsec-memo').val(mgrApproveData.wdf_mgr_memo).prop('readonly' , true);
-                        $('#btn-nor-saveManager').css('display' , 'none');
+                        $('#ip-nor-mgrsec-userpost').val(mgrApproveData.wdf_mgr_user).prop('readonly', true);
+                        $('#ip-nor-mgrsec-deptpost').val(mgrApproveData.wdf_mgr_dept).prop('readonly', true);
+                        $('#ip-nor-mgrsec-datepost').val(condateMgr).prop('readonly', true);
+                        $('#ip-nor-mgrsec-memo').val(mgrApproveData.wdf_mgr_memo).prop('readonly', true);
+                        $('#btn-nor-saveManager').css('display', 'none');
+
                     }
                 });
             }

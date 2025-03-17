@@ -477,23 +477,27 @@ class Normal_model extends CI_Model {
                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status")
             );
         }else if($posi > 75 || $ecode == "M0025" || $ecode == "M0015" || $ecode == "M0051"){
+            //กำหนดสิทธิ์ให้ พี่นิต , พี่เหน่ง , พี่พล
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
             );
         }else if($ecode == "M2076" || $ecode == "M2077"){
             echo json_encode(
                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') AND $sql_searchBydate $query_company $query_user $query_status")
             );
-        }else if($ecode == "M0040"){//พี่หนุ่ม
+        }else if($ecode == "M0040"){
+            //กำหนดสิทธิ์สำหรับพี่หนุ่ม
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1010' , '1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
             );
         }else if($ecode == "M0112"){
+            //กำหนดสิทธิ์สำหรับพี่ยูง
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
             );
         }else{
             if($ecode == "M0963"){
+                //กำหนดสิทธิ์สำหรับพี่ภพ
                 echo json_encode(
                     SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
                 );
@@ -825,7 +829,7 @@ class Normal_model extends CI_Model {
             }
 
             $sql = $this->getUserGroup_nor($approveGroup , $areaidGroup ,$userDeptCode);
-            $sqlUserInGroup = $this->getUserInGroup_nor($approveGroup , $areaidGroup , $userDeptCode);
+            $sqlUserInGroup = $this->getUserInGroup_nor($approveGroup , $areaidGroup , $userDeptCode , $areaid);
             
 
 
@@ -888,10 +892,12 @@ class Normal_model extends CI_Model {
         }
         
     }
-    private function getUserInGroup_nor($approveGroup , $areaidGroup , $userDeptCode)
+    private function getUserInGroup_nor($approveGroup , $areaidGroup , $userDeptCode , $areaid)
     {
         if($approveGroup != "" && $areaidGroup != ""){
             $sqlOnlyGroup4 = "";
+            $mgr2ForSt = "";
+
             if($areaidGroup == "tb"){
 
                 if(getUser()->ecode == "M2076" || getUser()->ecode == "M2222"){
@@ -910,11 +916,17 @@ class Normal_model extends CI_Model {
 
                 
             }else{
-                if($approveGroup == 4){
-                    $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
+                if($areaid == "st"){
+                    //กำหนดผู้จัดการคนที่ 2 เป็นพี่ป้อน M0282 เท่านั้น
+                    $mgr2ForSt = "AND app_ecode = 'M0282'";
                 }else{
-                    $sqlOnlyGroup4 = "";
+                    if($approveGroup == 4){
+                        $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
+                    }else{
+                        $sqlOnlyGroup4 = "";
+                    }
                 }
+
             }
 
             $sqlUserInGroup = $this->db->query("SELECT
@@ -929,7 +941,7 @@ class Normal_model extends CI_Model {
             app_deptcode2,
             app_deptcode3
             FROM approve_group
-            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlOnlyGroup4 ORDER BY app_group_order ASC
+            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlOnlyGroup4 $mgr2ForSt ORDER BY app_group_order ASC
             ");
             return $sqlUserInGroup;
         }
@@ -1101,7 +1113,7 @@ class Normal_model extends CI_Model {
                     $posiname = $userApproved->row()->apv_posiname;
 
                     $appGroup = $this->getUserGroupAped_nor($approveGroup , $areaidGroup , $posiname);
-                    $appGroupDetail = $this->getUserInGroupAped_nor($approveGroup , $areaidGroup , $userDeptCode);
+                    $appGroupDetail = $this->getUserInGroupAped_nor($approveGroup , $areaidGroup , $userDeptCode , $areaid);
                 }else{
                     $areaidGroup = null;
                     $posiname = null;
@@ -1211,34 +1223,14 @@ class Normal_model extends CI_Model {
         }
         
     }
-    private function getUserInGroupAped_nor($approveGroup , $areaidGroup , $userDeptCode)
+    private function getUserInGroupAped_nor($approveGroup , $areaidGroup , $userDeptCode , $areaid)
     {
         if($approveGroup != "" && $areaidGroup != ""){
-
-            // if($areaidGroup == "tb"){
-
-            //     if(getUser()->ecode == "M2076" || getUser()->ecode == "M2222"){
-            //         if($approveGroup == 4){
-            //             $sqlOnlyGroup4 = "AND app_ecode NOT IN ('M2076' , 'M2222')";
-            //         }else{
-            //             $sqlOnlyGroup4 = "";
-            //         }
-            //     }else if(getUser()->ecode == "M0051"){
-            //         if($approveGroup == 4){
-            //             $sqlOnlyGroup4 = "AND app_ecode != 'M0051'";
-            //         }else{
-            //             $sqlOnlyGroup4 = "";
-            //         }
-            //     }
-
-                
-            // }else{
-            //     if($approveGroup == 4){
-            //         $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
-            //     }else{
-            //         $sqlOnlyGroup4 = "";
-            //     }
-            // }
+            $mgr2ForSt = "";
+            if($areaid == "st"){
+                //กำหนดผู้จัดการคนที่ 2 เป็นพี่ป้อน M0282 เท่านั้น
+                $mgr2ForSt = "AND app_ecode = 'M0282'";
+            }
 
             $sqlUserInGroup = $this->db->query("SELECT
             app_autoid,
@@ -1252,7 +1244,7 @@ class Normal_model extends CI_Model {
             app_deptcode2,
             app_deptcode3
             FROM approve_group
-            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 ORDER BY app_group_order ASC
+            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $mgr2ForSt ORDER BY app_group_order ASC
             ");
             return $sqlUserInGroup;
         }
