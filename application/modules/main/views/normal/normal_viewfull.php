@@ -564,47 +564,92 @@
 
 
                     // Check Manager Section
-                    if(doc_deptcode == userdeptcode && userposi > 55){
-                        $('#manager_section_nor').css('display' , '');
-                        checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963" || areaid == "tb" && userecode == "M0025"){
-                        //Section ของผู้จัดการ TB เปิดให้พี่นิตสามารถเข้าไปอนุมัติได้ 
-                        $('#manager_section_nor').css('display' , '');
-                        checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                    }else if(doc_deptcode == '1007'){
-                        if(userecode == "M0040" || userecode == "M0506"){
-                            $('#manager_section_nor').css('display' , '');
-                            checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                        }
-                    }else if(doc_deptcode == '1010'){
-                        if(userecode == "M0025"){
-                            $('#manager_section_nor').css('display' , '');
-                            checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                        }
-                    }else if(areaid == "st" && userecode == "M0025"){
-                        //แก้ไขจากเดิม M2180 K teerasak เป็นคุณ saowanit อนุมัติแทน 23-12-2024
-                        $('#manager_section_nor').css('display' , '');
-                        checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                    }else if(doc_deptcode == '1014' || doc_deptcode == '1015'){
-                        if(userecode == "M0112"){
-                            $('#manager_section_nor').css('display' , '');
-                            checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
-                        }
-                    }
+                    // if(doc_deptcode == userdeptcode && userposi > 55){
+                    //     $('#manager_section_nor').css('display' , '');
+                    //     checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                    // }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963" || areaid == "tb" && userecode == "M0025"){
+                    //     //Section ของผู้จัดการ TB เปิดให้พี่นิตสามารถเข้าไปอนุมัติได้ 
+                    //     $('#manager_section_nor').css('display' , '');
+                    //     checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                    // }else if(doc_deptcode == '1007'){
+                    //     if(userecode == "M0040" || userecode == "M0506"){
+                    //         $('#manager_section_nor').css('display' , '');
+                    //         checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                    //     }
+                    // }else if(doc_deptcode == '1010'){
+                    //     if(userecode == "M0025"){
+                    //         $('#manager_section_nor').css('display' , '');
+                    //         checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                    //     }
+                    // }else if(areaid == "st" && userecode == "M0025"){
+                    //     //แก้ไขจากเดิม M2180 K teerasak เป็นคุณ saowanit อนุมัติแทน 23-12-2024
+                    //     $('#manager_section_nor').css('display' , '');
+                    //     checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                    // }else if(doc_deptcode == '1014' || doc_deptcode == '1015'){
+                    //     if(userecode == "M0112"){
+                    //         $('#manager_section_nor').css('display' , '');
+                    //         checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                    //     }
+                    // }
                     // Section manager approve
 
-                    if(areaid == "tb"){
-                        if(userecode == "M0051" || 
-                        userecode == "M1809" || 
-                        userecode == "M2076" || 
-                        userecode == "M2222" || 
-                        userecode == "M0963"){
-                            $('#btn-nor-saveManager').css('display' , '');
+                    // if(areaid == "tb"){
+                    //     if(userecode == "M0051" || 
+                    //     userecode == "M1809" || 
+                    //     userecode == "M2076" || 
+                    //     userecode == "M2222" || 
+                    //     userecode == "M0963"){
+                    //         $('#btn-nor-saveManager').css('display' , '');
+                    //     }else{
+                    //         $('#btn-nor-saveManager').css('display' , 'none');
+                    //     }
+                    // }
+                    // Section manager approve
+
+
+                    //Update new condition 
+                    if(areaid === "tb"){
+                        // เงื่อนไขของ Thebubbles
+                        const tbManagers = ["M0051", "M2076", "M0963", "M0025"];
+                        if (tbManagers.includes(userecode)) {
+                            //Section ของผู้จัดการ TB เปิดให้พี่นิตสามารถเข้าไปอนุมัติได้ 
+                            $('#manager_section_nor').css('display' , '');
+                            checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                        }
+                    }else if(areaid === "st"){
+                        //เงื่อนไขของ Subterra
+                        if(userecode === "M0025"){
+                            //แก้ไขจากเดิม M2180 K teerasak เป็นคุณ saowanit อนุมัติแทน 23-12-2024
+                            $('#manager_section_nor').css('display' , '');
+                            checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                        }
+                    }else{
+                        //เงื่อนไขของ Salee
+                        if(doc_deptcode == '1014' || doc_deptcode == '1015'){
+                            //แสดงผลของ Section กรณีที่เป็นเอกสารของแผนก Lab , QC
+                            if(userecode == "M0112"){
+                                $('#manager_section_nor').css('display' , '');
+                                checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                            }
+                        }else if(doc_deptcode == '1010'){
+                            //ปรับเงื่อนไขการอนุมัติให่พี่นิตอนุมัติ CS & PLANING 17-03-2025
+                            if(userecode == "M0025"){
+                                $('#manager_section_nor').css('display' , '');
+                                checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                            }
+                        }else if(doc_deptcode == '1007'){
+                            //ปรับเงื่อนไขการอนุมัติให้พี่หนุ่มอนุมัติแค่ของ Production 17-03-2025
+                            if(userecode == "M0040" || userecode == "M0506"){
+                                $('#manager_section_nor').css('display' , '');
+                                checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                            }
                         }else{
-                            $('#btn-nor-saveManager').css('display' , 'none');
+                            if(doc_deptcode == userdeptcode && userposi > 55){
+                                $('#manager_section_nor').css('display' , '');
+                                checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                            }
                         }
                     }
-                    // Section manager approve
 
                     break;
                 case "Manager approved":

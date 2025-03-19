@@ -913,8 +913,13 @@ class Normal_model extends CI_Model {
                 
             }else{
                 if($areaid == "st"){
-                    //กำหนดผู้จัดการคนที่ 2 เป็นพี่ป้อน M0282 เท่านั้น
-                    $mgr2ForSt = "AND app_ecode = 'M0282'";
+                    if($approveGroup == 4){
+                        //กำหนดผู้จัดการคนที่ 2 เป็นพี่ป้อน M0282 เท่านั้น
+                        $mgr2ForSt = "AND app_ecode = 'M0282'";
+                    }else{
+                        $mgr2ForSt = "";
+                    }
+
                 }else{
                     if($approveGroup == 4){
                         $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";

@@ -594,48 +594,79 @@
 
 
                     // Check Manager Section
-                    if(doc_deptcode == userdeptcode && userposi > 55){
-                        $('#manager_section').css('display' , '');
-                        checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                    }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963"){
-                        $('#manager_section').css('display' , '');
-                        checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                    }else if(doc_deptcode == '1007'){
-                        //ปรับเงื่อนไขการอนุมัติให้พี่หนุ่มอนุมัติแค่ของ Production 17-03-2025
-                        if(userecode == "M0040" || userecode == "M0506"){
-                            $('#manager_section').css('display' , '');
-                            checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                        }
-                    }else if(doc_deptcode == '1010'){
-                        //ปรับเงื่อนไขการอนุมัติให่พี่นิตอนุมัติ CS & PLANING 17-03-2025
-                        if(userecode == "M0025"){
-                            $('#manager_section').css('display' , '');
-                            checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                        }
-                    }else if(areaid == "st" && userecode == "M0025"){
-                        //แก้ไขจากเดิม M2180 K teerasak เป็นคุณ saowanit อนุมัติแทน 23-12-2024
-                        $('#manager_section').css('display' , '');
-                        checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                    }else if(doc_deptcode == '1014' || doc_deptcode == '1015'){
-                        if(userecode == "M0112"){
-                            $('#manager_section').css('display' , '');
-                            checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
-                        }
-                    }
-                    // Section manager approve
+                    // if(doc_deptcode == userdeptcode && userposi > 55){
+                    //     $('#manager_section').css('display' , '');
+                    //     checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                    // }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076" || areaid == "tb" && userecode == "M0963" || areaid == "tb" && userecode == "M0025"){
+                    //     //Section ของผู้จัดการ TB เปิดให้พี่นิตสามารถเข้าไปอนุมัติได้ 
+                    //     $('#manager_section').css('display' , '');
+                    //     checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                    // }else if(doc_deptcode == '1007'){
+                    //     //ปรับเงื่อนไขการอนุมัติให้พี่หนุ่มอนุมัติแค่ของ Production 17-03-2025
+                    //     if(userecode == "M0040" || userecode == "M0506"){
+                    //         $('#manager_section').css('display' , '');
+                    //         checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                    //     }
+                    // }else if(doc_deptcode == '1010'){
+                    //     //ปรับเงื่อนไขการอนุมัติให่พี่นิตอนุมัติ CS & PLANING 17-03-2025
+                    //     if(userecode == "M0025"){
+                    //         $('#manager_section').css('display' , '');
+                    //         checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                    //     }
+                    // }else if(areaid == "st" && userecode == "M0025"){
+                    //     //แก้ไขจากเดิม M2180 K teerasak เป็นคุณ saowanit อนุมัติแทน 23-12-2024
+                    //     $('#manager_section').css('display' , '');
+                    //     checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                    // }else if(doc_deptcode == '1014' || doc_deptcode == '1015'){
+                    //     if(userecode == "M0112"){
+                    //         $('#manager_section').css('display' , '');
+                    //         checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                    //     }
+                    // }
+                    
 
-                    if(areaid == "tb"){
-                        if(userecode == "M0051" || 
-                        userecode == "M1809" || 
-                        userecode == "M2076" || 
-                        userecode == "M2222" || 
-                        userecode == "M0963"){
-                            $('#btn-saveManager').css('display' , '');
+                    if(areaid === "tb"){
+                        // เงื่อนไขของ Thebubbles
+                        const tbManagers = ["M0051", "M2076", "M0963", "M0025"];
+                        if (tbManagers.includes(userecode)) {
+                            $('#manager_section').css('display', '');
+                            checkpaygroup(pricewithVat, 'adv', areaid, formcode);
+                        }
+                    }else if(areaid == "st"){
+                        //เงื่อนไขของ Subterra
+                        if(userecode === "M0025"){
+                            //แก้ไขจากเดิม M2180 K teerasak เป็นคุณ saowanit อนุมัติแทน 23-12-2024
+                            $('#manager_section').css('display' , '');
+                            checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                        }
+                    }else{
+                        //เงื่อนไขของ Salee
+                        if(doc_deptcode == '1014' || doc_deptcode == '1015'){
+                            //แสดงผลของ Section กรณีที่เป็นเอกสารของแผนก Lab , QC
+                            if(userecode == "M0112"){
+                                //เช็กว่า User ที่ Login เข้ามานั้นใช่ตามเงื่อนไขหรือไม่
+                                $('#manager_section').css('display' , '');
+                                checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                            }
+                        }else if(doc_deptcode == '1010'){
+                            //ปรับเงื่อนไขการอนุมัติให่พี่นิตอนุมัติ CS & PLANING 17-03-2025
+                            if(userecode == "M0025"){
+                                $('#manager_section').css('display' , '');
+                                checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                            }
+                        }else if(doc_deptcode == '1007'){
+                            //ปรับเงื่อนไขการอนุมัติให้พี่หนุ่มอนุมัติแค่ของ Production 17-03-2025
+                            if(userecode == "M0040" || userecode == "M0506"){
+                                $('#manager_section').css('display' , '');
+                                checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                            }
                         }else{
-                            $('#btn-saveManager').css('display' , 'none');
+                            if(doc_deptcode == userdeptcode && userposi > 55){
+                                $('#manager_section').css('display' , '');
+                                checkpaygroup(pricewithVat , 'adv' , areaid , formcode);
+                            }
                         }
                     }
-                    // Section manager approve
 
                     break;
                 case "Manager approved":
@@ -3221,53 +3252,106 @@
                         let mgrApproveData = res.data.mgrApproveData;
 
                         if(mgrApproveData.wdf_mgr_appr == "อนุมัติ"){
-
                             if(approveGroup != 5){
                                 $('.lineMgrApp').css('display' , '');
                                 let appGroup = res.data.appGroup;
                                 let appGroupDetail = res.data.appGroupDetail;
                                 let userApproved = res.data.userApproved;
                                 
-                                let htmlPay = ``;
-                                let appNumber = null;
+                                let htmlg1 = `<div class="col-md-12 form-group">`;
 
-                                let htmlg1 = `
-                                    <div class="col-md-12 form-group">
-                                `;
-                                    for(let i = 0 ; i < appGroup.length; i++){
-                                        appNumber = appGroup[i].app_number;
-                                        $('#check-mg-totalLength').val(appNumber);
-                                        htmlg1 +=`
-                                        <label><b>`+appGroup[i].app_posiname+`</b></label>
-                                        <div class="row">
-                                            <div class="col-lg-12 form-inline">`;
+                                // for(let i = 0 ; i < appGroup.length; i++){
+                                //     appNumber = appGroup[i].app_number;
+                                //     $('#check-mg-totalLength').val(appNumber);
+                                //     htmlg1 +=`
+                                //     <label><b>`+appGroup[i].app_posiname+`</b></label>
+                                //     <div class="row">
+                                //         <div class="col-lg-12 form-inline">`;
 
-                                            for(let ii = 0; ii < appGroupDetail.length; ii++){
-                                                let checkedData = '';
-                                                if(appGroup[i].app_posiname == appGroupDetail[ii].app_posiname){
+                                //         for(let ii = 0; ii < appGroupDetail.length; ii++){
+                                //             let checkedData = '';
+                                //             if(appGroup[i].app_posiname == appGroupDetail[ii].app_posiname){
 
-                                                    for(let iii = 0; iii < userApproved.length; iii++){
-                                                        if(appGroupDetail[ii].app_ecode == userApproved[iii].apv_ecode){
-                                                            checkedData = 'checked';
-                                                        }
-                                                    }
+                                //                 for(let iii = 0; iii < userApproved.length; iii++){
+                                //                     if(appGroupDetail[ii].app_ecode == userApproved[iii].apv_ecode){
+                                //                         checkedData = 'checked';
+                                //                     }
+                                //                 }
 
-                                                    htmlg1 +=`
-                                                    <div class="custom-control custom-checkbox mb-5 ml-3">
-                                                        <input type="checkbox" id="ipv-adv-appgd-`+appGroupDetail[ii].app_autoid+`" name="ipv-adv-appgd[]" class="custom-control-input cbGroupDetail" `+checkedData+`>
+                                //                 htmlg1 +=`
+                                //                 <div class="custom-control custom-checkbox mb-5 ml-3">
+                                //                     <input type="checkbox" id="ipv-adv-appgd-`+appGroupDetail[ii].app_autoid+`" name="ipv-adv-appgd[]" class="custom-control-input cbGroupDetail" `+checkedData+`>
 
-                                                        <label for="ipv-adv-appgd-`+appGroupDetail[ii].app_autoid+`" class="custom-control-label"><b>`+appGroupDetail[ii].app_user+`</b></label>
-                                                    </div>
+                                //                     <label for="ipv-adv-appgd-`+appGroupDetail[ii].app_autoid+`" class="custom-control-label"><b>`+appGroupDetail[ii].app_user+`</b></label>
+                                //                 </div>
 
-                                                    `;
+                                //                 `;
+                                //             }
+                                //         }   
+
+                                //     htmlg1 +=`
+                                //         </div>
+                                //     </div>
+                                //     `;
+                                // }
+
+                                for (let i = 0; i < appGroup.length; i++) {
+                                    let appNumber = appGroup[i].app_number;
+                                    $('#check-mg-totalLength').val(appNumber);
+
+                                    htmlg1 += `
+                                    <label><b>${appGroup[i].app_posiname}</b></label>
+                                    <div class="row">
+                                        <div class="col-lg-12 form-inline">`;
+
+                                    let mergedData = [];
+
+                                    // 1️⃣ ดึงข้อมูลจาก `appGroupDetail` ที่ตรงกับตำแหน่งนี้ก่อน
+                                    for (let ii = 0; ii < appGroupDetail.length; ii++) {
+                                        let checkedData = '';
+
+                                        if (appGroup[i].app_posiname == appGroupDetail[ii].app_posiname) {
+                                            for (let iii = 0; iii < userApproved.length; iii++) {
+                                                if (appGroupDetail[ii].app_ecode == userApproved[iii].apv_ecode) {
+                                                    checkedData = 'checked';
                                                 }
-                                            }   
+                                            }
 
-                                        htmlg1 +=`
-                                            </div>
-                                        </div>
-                                        `;
+                                            mergedData.push({
+                                                autoid: appGroupDetail[ii].app_autoid,
+                                                ecode: appGroupDetail[ii].app_ecode,
+                                                user: appGroupDetail[ii].app_user,
+                                                checked: checkedData
+                                            });
+                                        }
                                     }
+
+                                    // 2️⃣ เช็คว่ามีค่าใน `userApproved` ที่ไม่มีอยู่ใน `appGroupDetail` หรือไม่ (แต่ต้องเป็นตำแหน่งเดียวกัน)
+                                    for (let iii = 0; iii < userApproved.length; iii++) {
+                                        let isEcodeExists = mergedData.some(detail => detail.ecode === userApproved[iii].apv_ecode);
+                                        
+                                        if (!isEcodeExists && appGroup[i].app_posiname == userApproved[iii].apv_posiname) {
+                                            // เพิ่มเฉพาะค่าที่ตรงกับตำแหน่ง (app_posiname) เท่านั้น
+                                            mergedData.push({
+                                                autoid: userApproved[iii].apv_autoid,
+                                                ecode: userApproved[iii].apv_ecode,
+                                                user: userApproved[iii].apv_user,
+                                                checked: 'checked'
+                                            });
+                                        }
+                                    }
+
+                                    // 3️⃣ แสดงผลจาก `mergedData`
+                                    for (let data of mergedData) {
+                                        htmlg1 += `
+                                        <div class="custom-control custom-checkbox mb-5 ml-3">
+                                            <input type="checkbox" id="ipv-adv-appgd-${data.autoid}" name="ipv-adv-appgd[]" class="custom-control-input cbGroupDetail" ${data.checked}>
+                                            <label for="ipv-adv-appgd-${data.autoid}" class="custom-control-label"><b>${data.user}</b></label>
+                                        </div>`;
+                                    }
+
+                                    htmlg1 += `</div></div>`;
+                                }
 
                                     htmlg1 +=`
                                     </div>

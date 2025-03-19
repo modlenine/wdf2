@@ -475,23 +475,27 @@ class Advance_model extends CI_Model {
                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status")
             );
         }else if($posi > 75 || $ecode == "M0025" || $ecode == "M0015" || $ecode == "M0051"){
+            //กำหนดสิทธิ์ให้ พี่นิต , พี่เหน่ง , พี่พล
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
             );
         }else if($ecode == "M2076" || $ecode == "M2077"){
             echo json_encode(
                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') AND $sql_searchBydate $query_company $query_user $query_status")
             );
-        }else if($ecode == "M0040"){//พี่หนุ่ม
+        }else if($ecode == "M0040"){
+            //กำหนดสิทธิ์สำหรับพี่หนุ่ม
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1010' , '1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
             );
         }else if($ecode == "M0112"){
+            //กำหนดสิทธิ์สำหรับพี่ยูง
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
             );
         }else{
             if($ecode == "M0963"){
+                //กำหนดสิทธิ์สำหรับพี่ภพ
                 echo json_encode(
                     SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
                 );
@@ -828,7 +832,7 @@ class Advance_model extends CI_Model {
             }
 
             $sql = $this->getUserGroup($approveGroup , $areaidGroup , $wdfstatus);
-            $sqlUserInGroup = $this->getUserInGroup($approveGroup , $areaidGroup , $userDeptCode , $wdfstatus);
+            $sqlUserInGroup = $this->getUserInGroup($approveGroup , $areaidGroup , $userDeptCode , $areaid);
             
 
 
@@ -852,14 +856,14 @@ class Advance_model extends CI_Model {
     {
         $ecodeManagerLogin = "";
         if($approveGroup != "" && $areaidGroup != ""){
-
+            $sqlOnlyGroup4 = "";
             if($areaidGroup == "tb"){
                 $ecodeManagerLogin = getUser()->ecode;
                 if($approveGroup == 4){
                     if($wdfstatus == "Finance passed inspection (Clear Money)" || $wdfstatus == "Check budget already"){
                         if($ecodeManagerLogin == "M2222" || $ecodeManagerLogin == "M2076"){
                             $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 1' "; 
-                        }else if($ecodeManagerLogin == "M0051" || $ecodeManagerLogin == "M1809"){
+                        }else if($ecodeManagerLogin == "M0051" || $ecodeManagerLogin == "M0025"){
                             $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 2' "; 
                         }
                     }else{
@@ -891,43 +895,80 @@ class Advance_model extends CI_Model {
         }
         
     }
-    private function getUserInGroup($approveGroup , $areaidGroup , $userDeptCode , $wdfstatus)
+    private function getUserInGroup($approveGroup , $areaidGroup , $userDeptCode , $areaid)
     {
-        $ecodeManagerLogin = "";
-        $sqlOnlyGroup4 = "";
+
         if($approveGroup != "" && $areaidGroup != ""){
+            $sqlOnlyGroup4 = "";
+            $mgr2ForSt = "";
 
             if($areaidGroup == "tb"){
-                $ecodeManagerLogin = getUser()->ecode;
-                if($approveGroup == 4){
-                    if($wdfstatus == "Finance passed inspection (Clear Money)" || $wdfstatus == "Check budget already"){
-                        if($ecodeManagerLogin == "M2222" || $ecodeManagerLogin == "M2076"){
-                            $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 1' "; 
-                        }else if($ecodeManagerLogin == "M0051"){
-                            $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 2' "; 
-                        }
+
+                if(getUser()->ecode == "M2076" || getUser()->ecode == "M2222"){
+                    if($approveGroup == 4){
+                        $sqlOnlyGroup4 = "AND app_ecode NOT IN ('M2076' , 'M2222')";
                     }else{
                         $sqlOnlyGroup4 = "";
                     }
-
-                     
-                }else if($approveGroup == 3 || $approveGroup == 2 || $approveGroup == 1){
-                    if($wdfstatus == "Finance passed inspection (Clear Money)" || $wdfstatus == "Check budget already"){
-                        $sqlOnlyGroup4 = "AND app_ecode != '$ecodeManagerLogin' ";
+                }else if(getUser()->ecode == "M0051" || getUser()->ecode == "M0025"){
+                    if($approveGroup == 4){
+                        $sqlOnlyGroup4 = "AND app_ecode NOT IN ('M0051','M0025')";
                     }else{
                         $sqlOnlyGroup4 = "";
                     }
-
                 }else{
                     $sqlOnlyGroup4 = "";
                 }
             }else{
-                if($approveGroup == 4){
-                    $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
+                if($areaid == "st"){
+                    if($approveGroup == 4){
+                        //กำหนดผู้จัดการคนที่ 2 เป็นพี่ป้อน M0282 เท่านั้น
+                        $mgr2ForSt = "AND app_ecode = 'M0282'";
+                    }else{
+                        $mgr2ForSt = "";
+                    }
+
                 }else{
-                    $sqlOnlyGroup4 = "";
+                    if($approveGroup == 4){
+                        $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
+                    }else{
+                        $sqlOnlyGroup4 = "";
+                    }
                 }
+
             }
+
+            // if($areaidGroup == "tb"){
+            //     $ecodeManagerLogin = getUser()->ecode;
+            //     if($approveGroup == 4){
+            //         if($wdfstatus == "Finance passed inspection (Clear Money)" || $wdfstatus == "Check budget already"){
+            //             if($ecodeManagerLogin == "M2222" || $ecodeManagerLogin == "M2076"){
+            //                 $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 1' "; 
+            //             }else if($ecodeManagerLogin == "M0051"){
+            //                 $sqlOnlyGroup4 = "AND app_posiname != 'ผู้จัดการ ชุดที่ 2' "; 
+            //             }
+            //         }else{
+            //             $sqlOnlyGroup4 = "";
+            //         }
+
+                     
+            //     }else if($approveGroup == 3 || $approveGroup == 2 || $approveGroup == 1){
+            //         if($wdfstatus == "Finance passed inspection (Clear Money)" || $wdfstatus == "Check budget already"){
+            //             $sqlOnlyGroup4 = "AND app_ecode != '$ecodeManagerLogin' ";
+            //         }else{
+            //             $sqlOnlyGroup4 = "";
+            //         }
+
+            //     }else{
+            //         $sqlOnlyGroup4 = "";
+            //     }
+            // }else{
+            //     if($approveGroup == 4){
+            //         $sqlOnlyGroup4 = "AND app_deptcode != '$userDeptCode'";
+            //     }else{
+            //         $sqlOnlyGroup4 = "";
+            //     }
+            // }
 
             $sqlUserInGroup = $this->db->query("SELECT
             app_autoid,
@@ -941,7 +982,7 @@ class Advance_model extends CI_Model {
             app_deptcode2,
             app_deptcode3
             FROM approve_group
-            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlOnlyGroup4 ORDER BY app_group_order ASC
+            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $sqlOnlyGroup4 $mgr2ForSt ORDER BY app_group_order ASC , app_user ASC
             ");
             return $sqlUserInGroup;
         }
@@ -1111,8 +1152,8 @@ class Advance_model extends CI_Model {
                     $areaidGroup = $userApproved->row()->apv_areaidgroup;
                     $posiname = $userApproved->row()->apv_posiname;
 
-                    $appGroup = $this->getUserGroup($approveGroup , $areaidGroup , $wdfstatus);
-                    $appGroupDetail = $this->getUserInGroup($approveGroup , $areaidGroup , $userDeptCode , $wdfstatus);
+                    $appGroup = $this->getUserGroupAped_adv($approveGroup , $areaidGroup , $posiname);
+                    $appGroupDetail = $this->getUserInGroupAped_adv($approveGroup , $areaidGroup , $userDeptCode , $areaid);
                 }else{
                     $areaidGroup = null;
                     $posiname = null;
@@ -1176,6 +1217,53 @@ class Advance_model extends CI_Model {
         }
 
         echo json_encode($output);
+    }
+
+    private function getUserGroupAped_adv($approveGroup , $areaidGroup , $posiname)
+    {
+        if($approveGroup != "" && $areaidGroup != ""){
+            
+            $sql = $this->db->query("SELECT
+            app_autoid,
+            app_group,
+            app_posiname,
+            app_areaid,
+            app_number,
+            app_deptcode,
+            app_deptcode2,
+            app_deptcode3
+            FROM approve_group
+            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 GROUP BY app_posiname ORDER BY app_group_order ASC
+            ");
+            return $sql;
+        }
+        
+    }
+    private function getUserInGroupAped_adv($approveGroup , $areaidGroup , $userDeptCode , $areaid)
+    {
+        if($approveGroup != "" && $areaidGroup != ""){
+            $mgr2ForSt = "";
+            if($areaid == "st"){
+                //กำหนดผู้จัดการคนที่ 2 เป็นพี่ป้อน M0282 เท่านั้น
+                $mgr2ForSt = "AND app_ecode = 'M0282'";
+            }
+
+            $sqlUserInGroup = $this->db->query("SELECT
+            app_autoid,
+            app_group,
+            app_username,
+            app_user,
+            app_posiname,
+            app_ecode,
+            app_areaid,
+            app_deptcode,
+            app_deptcode2,
+            app_deptcode3
+            FROM approve_group
+            WHERE app_group = '$approveGroup' AND app_status = 'Active' AND app_areaid = '$areaidGroup' AND app_group != 5 $mgr2ForSt ORDER BY app_group_order ASC
+            ");
+            return $sqlUserInGroup;
+        }
     }
 
     private function getUserApprovedFromDb($formcode , $areaid)
