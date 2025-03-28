@@ -213,114 +213,6 @@ class Advance_model extends CI_Model {
     }
 
 
-    // public function advance_list()
-    // {
-    //     // DB table to use
-    //     $table = 'list_advance';
-
-    //     // Table's primary key
-    //     $primaryKey = 'wdf_autoid';
-
-    //     $columns = array(
-    //         array('db' => 'wdf_formno', 'dt' => 0,
-    //             'formatter' => function($d , $row){
-    //                 $formcode = conFormNoToFormCode($d);
-    //                 $output ='
-    //                 <a href="javascript:void(0)" class="select_form"
-    //                     data_formcode="'.$formcode.'"
-    //                     data_formno="'.$d.'"
-    //                 ><b>'.$d.'</b></a>
-    //                 ';
-    //                 return $output;
-    //             }
-    //         ),
-    //         array('db' => 'wdf_areaid', 'dt' => 1 ,
-    //             'formatter' => function($d , $row){
-    //                 $resultCon = "";
-    //                 switch($d){
-    //                     case "sc":
-    //                         $resultCon = "Salee Colour";
-    //                         break;
-    //                     case "pa":
-    //                         $resultCon = "Poly Meritasia";
-    //                         break;
-    //                     case "ca":
-    //                         $resultCon = "Composite Asia";
-    //                         break;
-    //                     case "st":
-    //                         $resultCon = "Subterra";
-    //                         break;
-    //                     case "tb":
-    //                         $resultCon = "The bubbles";
-    //                         break;
-    //                 }
-    //                 return $resultCon;
-    //             }
-    //         ),
-    //         array('db' => 'wdf_user', 'dt' => 2),
-    //         array('db' => 'wdf_ecode', 'dt' => 3),
-    //         array('db' => 'wdf_dept', 'dt' => 4),
-    //         array('db' => 'wdf_datetime', 'dt' => 5 ,
-    //             'formatter' => function($d , $row){
-    //                 return conDateTimeFromDb($d);
-    //             }
-    //         ),
-    //         array('db' => 'wdf_pricewithvat', 'dt' => 6 ,
-    //             'formatter' => function($d , $row){
-    //                 return number_format($d , 2);
-    //             }
-    //         ),
-    //         array('db' => 'wdf_status', 'dt' => 7,
-    //             'formatter' => function($d , $row){
-    //                 $colorText = conColorTextStatus($d);
-    //                 $statusHtml = '<b><span '.$colorText.'>'.$d.'</span></b>';
-    //                 return $statusHtml;
-    //             }
-    //         ),
-    //     );
-
-    //     // SQL server connection information
-    //     $sql_details = array(
-    //         'user' => getDb()->db_username,
-    //         'pass' => getDb()->db_password,
-    //         'db'   => getDb()->db_databasename,
-    //         'host' => getDb()->db_host
-    //     );
-
-    //     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    //     * If you just want to use the basic configuration for DataTables with PHP
-    //     * server-side, there is no need to edit below this line.
-    //     */
-    //     require('server-side/scripts/ssp.class.php');
-
-    //     $ecode = getUser()->ecode;
-    //     $deptcode = getUser()->DeptCode;
-    //     $posi = getUser()->posi;
-
-
-    //     if($deptcode == "1003" || $ecode == "M1809"){
-    //         echo json_encode(
-    //             SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
-    //         );
-    //     }else if($posi > 75){
-    //         echo json_encode(
-    //             SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
-    //         );
-    //     }else if($ecode == "M0051"){
-    //         echo json_encode(
-    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' OR wdf_areaid IN ('tb') ")
-    //         );
-    //     }else if($ecode == "M2076"){
-    //         echo json_encode(
-    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') ")
-    //         );
-    //     }else{
-    //         echo json_encode(
-    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' ")
-    //         );
-    //     }
-    // }
-
     public function advance_list_filter($startDate , $endDate , $company , $user , $dept , $status)
     {
         // DB table to use
@@ -3359,7 +3251,7 @@ class Advance_model extends CI_Model {
             wdf_master.wdf_deptcode
             FROM
             wdf_master
-            WHERE wdf_doctype = 'adv' $condition_dept
+            WHERE wdf_doctype = 'adv'
             GROUP BY wdf_dept ORDER BY wdf_deptcode ASC");
             // Get dept
 

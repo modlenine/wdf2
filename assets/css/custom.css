@@ -528,35 +528,11 @@ Control Advance Page
 	height:50px;
 }
 
-#advance_list{
-	width:100% !important;
-}
 
 #userpermission_list{
 	width:100% !important;
 }
 
-.advl-th1{
-	width: 100px !important;
-}
-.advl-th2{
-	width: 80px !important;
-}
-.advl-th3{
-	width: 150px !important;
-}
-.advl-th4{
-	width: 80px !important;
-}
-.advl-th5{
-	width: 80px !important;
-}
-/* .advl-th6{
-	width: 150px !important;
-} */
-.advl-th7{
-	width: 80px !important;
-}
 
 .bgBath{
 	background-color: #d1d1d6 !important;
@@ -590,10 +566,19 @@ Control Advance Page
 	cursor:pointer;
 }
 
+#advance_list{
+	width:100%;
+}
+
+@media (min-width: 1440px) {
+	#advance_list {
+		min-width: 100%;
+	}
+}
 
 @media (min-width:1024px) and (max-width:1439px){
 	#advance_list{
-		width:1300px !important;
+		width:100%;
 	}
 }
 
@@ -603,7 +588,7 @@ Control Advance Page
 		height:300px !important;
 	}
 	#advance_list{
-		width:1200px !important;
+		width:100%;
 	}
 }
 
@@ -841,8 +826,8 @@ Control Normal Page
 /* Tablet */
 @media (min-width: 768px) and (max-width: 1023px) {
 	#canvas_sign {
-		width: 310px;
-		height: 300px;
+		width: 310px !important;
+		height: 300px !important;
 	}
 	#normal_list {
 		width: 100%;
@@ -852,8 +837,8 @@ Control Normal Page
 /* Mobile */
 @media (min-width: 320px) and (max-width: 767px) {
 	#canvas_sign {
-		width: 250px;
-		height: 300px;
+		width: 250px !important;
+		height: 300px !important;
 	}
 	#normal_list {
 		width: 100%;

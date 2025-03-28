@@ -23,6 +23,13 @@ class Advance extends MX_Controller {
         getFooter();
     }
 
+    public function get_wdfdatalist_json()
+    {
+        $doctype = "adv";
+        $ecode = getUser()->ecode;
+        get_wdfdatalist($doctype ,$ecode);
+    }
+
     public function addnew()
     {
         $data = array(

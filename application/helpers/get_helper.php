@@ -435,7 +435,14 @@ function get_wdfdatalist($doctype, $ecode)
     $orderBy = $columns[$orderColumn];
 
     // ตรวจสอบสิทธิ์ approve
-    $sqlcheckApproveUser = gfn()->db->query("SELECT apv_formcode FROM approve_user WHERE apv_ecode = ?", array($ecode));
+    $sqlcheckApproveUser = gfn()->db->query("SELECT 
+    approve_user.apv_formcode 
+    FROM approve_user
+    WHERE approve_user.apv_ecode = ? AND EXISTS (
+      SELECT 1 FROM wdf_master 
+      WHERE wdf_master.wdf_formcode = approve_user.apv_formcode 
+        AND wdf_master.wdf_doctype = ?
+    )", array($ecode , $doctype));
     $formcodeArray = array_column($sqlcheckApproveUser->result_array(), 'apv_formcode');
     $useWhereIn = count($formcodeArray) > 0;
 
@@ -499,7 +506,7 @@ function get_wdfdatalist($doctype, $ecode)
     
         // สถานะ
         if ($status_filter != "0") {
-            $con_status = conStatusNumToText($status_filter, "wdf");
+            $con_status = conStatusNumToText($status_filter, "adv");
             $sql .= " AND wdf_status = ?";
             $params[] = $con_status;
         }
