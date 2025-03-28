@@ -214,116 +214,6 @@ class Normal_model extends CI_Model {
         echo json_encode($output);
     }
 
-
-    // public function normal_list()
-    // {
-    //     // DB table to use
-    //     $table = 'list_normal';
-
-    //     // Table's primary key
-    //     $primaryKey = 'wdf_autoid';
-
-    //     $columns = array(
-    //         array('db' => 'wdf_formno', 'dt' => 0,
-    //             'formatter' => function($d , $row){
-    //                 $formcode = conFormNoToFormCode($d);
-    //                 $output ='
-    //                 <a href="javascript:void(0)" class="select_form"
-    //                     data_formcode="'.$formcode.'"
-    //                     data_formno="'.$d.'"
-    //                 ><b>'.$d.'</b></a>
-    //                 ';
-    //                 return $output;
-    //             }
-    //         ),
-    //         array('db' => 'wdf_areaid', 'dt' => 1 ,
-    //             'formatter' => function($d , $row){
-    //                 $resultCon = "";
-    //                 switch($d){
-    //                     case "sc":
-    //                         $resultCon = "Salee Colour";
-    //                         break;
-    //                     case "pa":
-    //                         $resultCon = "Poly Meritasia";
-    //                         break;
-    //                     case "ca":
-    //                         $resultCon = "Composite Asia";
-    //                         break;
-    //                     case "st":
-    //                         $resultCon = "Subterra";
-    //                         break;
-    //                     case "tb":
-    //                         $resultCon = "The bubbles";
-    //                         break;
-    //                 }
-    //                 return $resultCon;
-    //             }
-    //         ),
-    //         array('db' => 'wdf_user', 'dt' => 2),
-    //         array('db' => 'wdf_ecode', 'dt' => 3),
-    //         array('db' => 'wdf_dept', 'dt' => 4),
-    //         array('db' => 'wdf_datetime', 'dt' => 5 ,
-    //             'formatter' => function($d , $row){
-    //                 return conDateTimeFromDb($d);
-    //             }
-    //         ),
-    //         array('db' => 'wdf_pricewithvat', 'dt' => 6 ,
-    //             'formatter' => function($d , $row){
-    //                 return number_format($d , 2);
-    //             }
-    //         ),
-    //         array('db' => 'wdf_status', 'dt' => 7,
-    //             'formatter' => function($d , $row){
-    //                 $colorText = conColorTextStatus($d);
-    //                 $statusHtml = '<b><span '.$colorText.'>'.$d.'</span></b>';
-    //                 return $statusHtml;
-    //             }
-    //         ),
-    //     );
-
-    //     // SQL server connection information
-    //     $sql_details = array(
-    //         'user' => getDb()->db_username,
-    //         'pass' => getDb()->db_password,
-    //         'db'   => getDb()->db_databasename,
-    //         'host' => getDb()->db_host
-    //     );
-
-    //     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    //     * If you just want to use the basic configuration for DataTables with PHP
-    //     * server-side, there is no need to edit below this line.
-    //     */
-    //     require('server-side/scripts/ssp.class.php');
-
-    //     $ecode = getUser()->ecode;
-    //     $deptcode = getUser()->DeptCode;
-    //     $posi = getUser()->posi;
-
-
-    //     if($deptcode == "1003" || $ecode == "M1809"){
-    //         echo json_encode(
-    //             SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
-    //         );
-    //     }else if($posi > 75){
-    //         echo json_encode(
-    //             SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
-    //         );
-    //     }else if($ecode == "M0051"){
-    //         echo json_encode(
-    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' OR wdf_areaid IN ('tb') ")
-    //         );
-    //     }else if($ecode == "M2076"){
-    //         echo json_encode(
-    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') ")
-    //         );
-    //     }else{
-    //         echo json_encode(
-    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' ")
-    //         );
-    //     }
-    // }
-
-
     public function normal_list_filter($startDate , $endDate , $company , $user , $dept , $status)
     {
         // DB table to use
@@ -443,7 +333,7 @@ class Normal_model extends CI_Model {
         if($user == "0"){
             $query_user = "";
         }else{
-            $query_user = "AND wdf_ecode = '$user' ";
+            $query_user = "AND wdf_user LIKE '$user%' ";
         }
 
         $query_dept = "";
@@ -479,7 +369,7 @@ class Normal_model extends CI_Model {
         }else if($posi > 75 || $ecode == "M0025" || $ecode == "M0015" || $ecode == "M0051"){
             //กำหนดสิทธิ์ให้ พี่นิต , พี่เหน่ง , พี่พล
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status ORDER BY wdf_autoid DESC")
             );
         }else if($ecode == "M2076" || $ecode == "M2077"){
             echo json_encode(
@@ -488,26 +378,118 @@ class Normal_model extends CI_Model {
         }else if($ecode == "M0040"){
             //กำหนดสิทธิ์สำหรับพี่หนุ่ม
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
             );
         }else if($ecode == "M0112"){
             //กำหนดสิทธิ์สำหรับพี่ยูง
             echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
+                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
             );
         }else{
             if($ecode == "M0963"){
                 //กำหนดสิทธิ์สำหรับพี่ภพ
                 echo json_encode(
-                    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
+                    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
                 );
             }else{
                 echo json_encode(
-                    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status $query_approve_user")
+                    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
                 );
             }
         }
     }
+
+    public function get_wdfdatalist_json()
+    {
+        $ecode = getUser()->ecode;
+        $doctype = "wdf";
+        $search = $this->input->post('search')['value'];
+        $orderColumn = $this->input->post('order')[0]['column'];
+        $orderDir = $this->input->post('order')[0]['dir'];
+        $start = $this->input->post('start');
+        $length = $this->input->post('length');
+
+        // Map ชื่อคอลัมน์กับ index
+        $columns = [
+            'wdf_formno',
+            'wdf_formcode',
+            'wdf_areaid',
+            'wdf_doctype',
+            'wdf_status',
+            'wdf_user',
+            'wdf_pricewithvat',
+            'wdf_currency',
+            'wdf_datetime'
+        ];
+        $orderBy = $columns[$orderColumn];
+
+        // ตรวจสอบสิทธิ์ approve
+        $sqlcheckApproveUser = $this->db->query("SELECT 
+        apv_formcode FROM approve_user WHERE apv_ecode = ?
+        ", array($ecode));
+
+        $formcodeArray = array_column($sqlcheckApproveUser->result_array(), 'apv_formcode');
+        $useWhereIn = count($formcodeArray) > 0;
+        $formcodePlaceholder = implode(',', array_fill(0, count($formcodeArray), '?'));
+
+        // เงื่อนไขหลัก
+        $baseSQL = "SELECT * FROM wdf_master
+            WHERE wdf_doctype = ?
+        ";
+        $params = [$doctype];
+
+        // เงื่อนไขสิทธิ์เพิ่มเติม
+        if ($useWhereIn) {
+            $baseSQL .= " AND wdf_formcode IN ($formcodePlaceholder)";
+            $params = array_merge($params, $formcodeArray);
+        }
+
+        // เงื่อนไข search
+        if (!empty($search)) {
+            $baseSQL .= " AND (
+                wdf_formno LIKE ? OR
+                wdf_user LIKE ? OR
+                wdf_status LIKE ?
+            )";
+            $params = array_merge($params, array_fill(0, 3, "%$search%"));
+        }
+
+        // นับ total records ทั้งหมด
+        $queryAll = $this->db->query($baseSQL, $params);
+        $recordsTotal = $queryAll->num_rows();
+
+        // เพิ่ม order + limit
+        $baseSQL .= " ORDER BY $orderBy $orderDir LIMIT ?, ?";
+        $params[] = (int) $start;
+        $params[] = (int) $length;
+
+        $queryPage = $this->db->query($baseSQL, $params);
+
+        // จัด format ผลลัพธ์
+        $data = [];
+        foreach ($queryPage->result() as $row) {
+            $data[] = [
+                "wdf_formno" => $row->wdf_formno,
+                "wdf_formcode" => $row->wdf_formcode,
+                "wdf_areaid" => $row->wdf_areaid,
+                "wdf_doctype" => $row->wdf_doctype,
+                "wdf_status" => $row->wdf_status,
+                "wdf_user" => $row->wdf_user,
+                "wdf_pricewithvat" => $row->wdf_pricewithvat,
+                "wdf_currency" => $row->wdf_currency,
+                "wdf_datetime" => $row->wdf_datetime
+            ];
+        }
+
+        // ส่งกลับ
+        echo json_encode([
+            "draw" => intval($this->input->post('draw')),
+            "recordsTotal" => $recordsTotal,
+            "recordsFiltered" => $recordsTotal,
+            "data" => $data
+        ]);
+    }
+
 
 
     public function normal_getDataviewfull()
@@ -1908,7 +1890,7 @@ class Normal_model extends CI_Model {
             wdf_master.wdf_deptcode
             FROM
             wdf_master
-            WHERE wdf_doctype = 'wdf' $condition_dept
+            WHERE wdf_doctype = 'wdf'
             GROUP BY wdf_dept ORDER BY wdf_deptcode ASC");
             // Get dept
 

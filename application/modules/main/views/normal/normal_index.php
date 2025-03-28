@@ -23,21 +23,21 @@
 				<hr class="norHr">
 
 				<div class="row">
-					<div class="col-md-4">
-						<button type="button" id="btn-addnewnor" name="btn-addnewnor" class="btn btn-primary"><i class="dw dw-add-file1  mr-2"></i>เพิ่มรายการใหม่</button>
+					<div class="col-md-4 form-group">
+						<button type="button" id="btn-addnewnor" name="btn-addnewnor" class="btn btn-primary btn-block"><i class="dw dw-add-file1  mr-2"></i>เพิ่มรายการใหม่</button>
 					</div>
 					<div class="col-md-8">
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-4 form-group">
 								<input type="text" name="startDate-nor" id="startDate-nor" class="form-control">
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 form-group">
 								<input type="text" name="endDate-nor" id="endDate-nor" class="form-control">
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 form-group">
 								<button type="button" id="btn-dateSearch-nor" name="btn-dateSearch-nor" class="btn btn-success btn-block"><i class="dw dw-loupe"></i>&nbsp;ค้นหา</button>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 form-group">
 								<button type="button" id="btn-dateClear-nor" name="btn-dateClear-nor" class="btn btn-warning btn-block"><i class="dw dw-refresh1"></i>&nbsp;ล้าง</button>
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 				</div>
 
 				<div class="row mt-2">
-					<div class="col-md-3">
+					<div class="col-md-3 form-group">
 						<select name="filterCompany-detail-nor" id="filterCompany-detail-nor" class="form-control">
 							<option value="">กรองด้วยชื่อบริษัท</option>
 							<option value="sc">Salee Colour Public Company Limited.</option>
@@ -55,13 +55,13 @@
 							<option value="tb">The bubbles Co.,Ltd.</option>
 						</select>
 					</div>
-					<div class="col-md-3">
-						<div id="filterUser-nor"></div>
+					<div class="col-md-3 form-group">
+						<input type="text" name="filterUser-detail-nor" id="filterUser-detail-nor" class="form-control" placeholder="กรองชื่อผู้ร้องขอ">
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 form-group">
 						<div id="filterDept-nor"></div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 form-group">
 						<div id="filterStatus-nor"></div>
 					</div>
 				</div>
@@ -73,18 +73,19 @@
 							<table id="normal_list" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th class="advl-th1">เลขที่คำขอ</th>
-										<th class="advl-th2">บริษัท</th>
-										<th class="advl-th3">ผู้ร้องขอ</th>
-										<th class="advl-th4">รหัสพนักงาน</th>
-										<th class="advl-th5">แผนก</th>
-										<th class="advl-th6">วันที่ร้องขอ</th>
-										<th class="advl-th7">จำนวนเงิน</th>
-										<th class="advl-th7">สกุลเงิน</th>
-										<th class="advl-th9">หมายเหตุ</th>
-										<th class="advl-th8">สถานะ</th>
+										<th class="">เลขที่คำขอ</th>
+										<th class="">บริษัท</th>
+										<th class="">ผู้ร้องขอ</th>
+										<th class="">รหัสพนักงาน</th>
+										<th class="">แผนก</th>
+										<th class="">วันที่ร้องขอ</th>
+										<th class="">จำนวนเงิน</th>
+										<th class="">สกุลเงิน</th>
+										<th class="">หมายเหตุ</th>
+										<th class="">สถานะ</th>
 									</tr>
 								</thead>
+								<tbody></tbody>
 							</table>
 						</div>
 					</div>
@@ -100,6 +101,7 @@
 </html>
 
 <script>
+	
 	$(document).ready(function(){
 		$('#btn-addnewnor').click(function(){
 			location.href = url+'new-document-normal.html';
@@ -109,55 +111,55 @@
 		loadDataForFilter_nor();
 
 
-		function load_nor_list()
-		{
-			let thid = 1;
-			$('#normal_list thead th').each(function() {
-				var title = $(this).text();
-				$(this).html(title + ' <input type="text" id="normal_list'+thid+'" class="col-search-input" placeholder="Search ' + title + '" />');
-				thid++;
-			});
-        	$('#normal_list').DataTable().destroy();
-                var table = $('#normal_list').DataTable({
-                            "scrollX": true,
-                            "processing": true,
-                            "serverSide": true,
-                            "stateSave": true,
-                            stateLoadParams: function(settings, data) {
-                                for (i = 0; i < data.columns["length"]; i++) {
-                                    let col_search_val = data.columns[i].search.search;
-                                    if (col_search_val !== "") {
-                                        $("input", $("#normal_list thead th")[i]).val(col_search_val);
-                                    }
-                                }
-                            },
-                            "ajax": {
-                                "url":"<?php echo base_url('main/normal/normal_list') ?>",
-                            },
-                            order: [
-                                [0, 'desc']
-                            ],
-                            columnDefs: [{
-                                    targets: "_all",
-                                    orderable: false
-                                },
-                            ],
-                    });
+		// function load_nor_list()
+		// {
+		// 	let thid = 1;
+		// 	$('#normal_list thead th').each(function() {
+		// 		var title = $(this).text();
+		// 		$(this).html(title + ' <input type="text" id="normal_list'+thid+'" class="col-search-input" placeholder="Search ' + title + '" />');
+		// 		thid++;
+		// 	});
+        // 	$('#normal_list').DataTable().destroy();
+        //         var table = $('#normal_list').DataTable({
+        //                     "scrollX": true,
+        //                     "processing": true,
+        //                     "serverSide": true,
+        //                     "stateSave": true,
+        //                     stateLoadParams: function(settings, data) {
+        //                         for (i = 0; i < data.columns["length"]; i++) {
+        //                             let col_search_val = data.columns[i].search.search;
+        //                             if (col_search_val !== "") {
+        //                                 $("input", $("#normal_list thead th")[i]).val(col_search_val);
+        //                             }
+        //                         }
+        //                     },
+        //                     "ajax": {
+        //                         "url":"<?php echo base_url('main/normal/normal_list') ?>",
+        //                     },
+        //                     order: [
+        //                         [0, 'desc']
+        //                     ],
+        //                     columnDefs: [{
+        //                             targets: "_all",
+        //                             orderable: false
+        //                         },
+        //                     ],
+        //             });
 
-            table.columns().every(function() {
-                var table = this;
-                $('input', this.header()).on('keyup change', function() {
-                    if (table.search() !== this.value) {
-                        table.search(this.value).draw();
-                    }
-                });
-            });
+        //     table.columns().every(function() {
+        //         var table = this;
+        //         $('input', this.header()).on('keyup change', function() {
+        //             if (table.search() !== this.value) {
+        //                 table.search(this.value).draw();
+        //             }
+        //         });
+        //     });
 
-            $('#normal_list6').prop('readonly' , true).css({
-                'background-color':'#F5F5F5',
-                'cursor':'no-drop'
-            });
-		}
+        //     $('#normal_list6').prop('readonly' , true).css({
+        //         'background-color':'#F5F5F5',
+        //         'cursor':'no-drop'
+        //     });
+		// }
 
 
 		function load_nor_list_filter()
@@ -208,10 +210,10 @@
 			});
         	$('#normal_list').DataTable().destroy();
                 var table = $('#normal_list').DataTable({
-                            "scrollX": true,
-                            "processing": true,
-                            "serverSide": true,
-                            "stateSave": true,
+                            scrollX: true,
+                            processing: true,
+                            serverSide: true,
+                            stateSave: true,
                             stateLoadParams: function(settings, data) {
                                 for (i = 0; i < data.columns["length"]; i++) {
                                     let col_search_val = data.columns[i].search.search;
@@ -220,32 +222,67 @@
                                     }
                                 }
                             },
-                            "ajax": {
-                                "url":"<?php echo base_url('main/normal/normal_list_filter/') ?>"+startDate_filter+"/"+endDate_filter+"/"+company_filter+"/"+user_filter+"/"+dept_filter+"/"+status_filter,
+                            ajax: {
+                                url:"<?php echo base_url('main/normal/get_wdfdatalist_json/') ?>",
+								type:'POST',
+								data:function(d){
+									d.startDate_filter = startDate_filter,
+									d.endDate_filter = endDate_filter,
+									d.company_filter = company_filter,
+									d.user_filter = user_filter,
+									d.dept_filter = dept_filter,
+									d.status_filter = status_filter
+								}
                             },
-                            order: [
+							columns: [
+								{ 
+									data: 'wdf_formno' ,
+									render:function(data , type , row , meta){
+										let html = `
+										<a href="javascript:void(0)" class="select_form_nor"
+											data_formcode="${row.wdf_formcode}"
+											data_formno="${row.wdf_formno}"
+										><b>${data}</b></a>
+										`;
+										return html;
+									}
+								},
+								{ data: 'wdf_areaid' },
+								{ data: 'wdf_user' },
+								{ data: 'wdf_ecode' },
+								{ data: 'wdf_dept' },
+								{ data: 'wdf_datetime' },
+								{ data: 'wdf_pricewithvat' },
+								{ data: 'wdf_currency' },
+								{ data: 'wdf_ap_memo' },
+								{ data: 'wdf_status' }
+							],
+							order: [
                                 [0, 'desc']
                             ],
-                            columnDefs: [{
+							columnDefs: [{
                                     targets: "_all",
                                     orderable: false
                                 },
+								{targets: [0 , 1 , 2 ],width: "100px",},
+								{targets: [3 ,4 , 5, 7 ],width: "50px",},
+								{targets: [8 , 9],width: "150px",},
                             ],
                     });
 
-            table.columns().every(function() {
-                var table = this;
-                $('input', this.header()).on('keyup change', function() {
-                    if (table.search() !== this.value) {
-                        table.search(this.value).draw();
-                    }
-                });
-            });
+					table.columns().every(function() {
+						var table = this;
+						$('input', this.header()).on('keyup change', function() {
+							if (table.search() !== this.value) {
+								table.search(this.value).draw();
+							}
+						});
+					});
 
-            $('#normal_list6 , #normal_list2').prop('readonly' , true).css({
-                'background-color':'#F5F5F5',
-                'cursor':'no-drop'
-            });
+					$('#normal_list6 , #normal_list2').prop('readonly' , true).css({
+						'background-color':'#F5F5F5',
+						'cursor':'no-drop'
+					});
 		}
 
 		$(document).on('click' , '#btn-dateSearch-nor' , function(){
@@ -295,19 +332,19 @@
 					let deptResult = res.data.filterDept;
 
 					// create data filterBy user
-					let userHtml = `
-					<select id="filterUser-detail-nor" name="filterUser-detail-nor" class="form-control">
-						<option value="">กรองด้วยชื่อผู้ร้องขอ</option>
-					`;
-					for(let i = 0; i < userResult.length; i++){
-						userHtml +=`
-						<option value="`+userResult[i].wdf_ecode+`">`+userResult[i].wdf_user+`</option>
-						`;
-					}
-					userHtml +=`
-					</select>
-					`;
-					$('#filterUser-nor').html(userHtml);
+					// let userHtml = `
+					// <select id="filterUser-detail-nor" name="filterUser-detail-nor" class="form-control">
+					// 	<option value="">กรองด้วยชื่อผู้ร้องขอ</option>
+					// `;
+					// for(let i = 0; i < userResult.length; i++){
+					// 	userHtml +=`
+					// 	<option value="`+userResult[i].wdf_ecode+`">`+userResult[i].wdf_user+`</option>
+					// 	`;
+					// }
+					// userHtml +=`
+					// </select>
+					// `;
+					// $('#filterUser-nor').html(userHtml);
 					// create data filterBy user
 
 

@@ -18,9 +18,24 @@ class Normal extends MX_Controller {
         $data = array(
             "title" => "หน้าใบเบิกเงินทดรองจ่าย"
         );
+        // $doctype = "wdf";
+        // $ecode = getUser()->ecode;
+        // if(get_wdfdatalist($doctype , $ecode) == true){
+        //     getHead();
+        //     getContent("normal/normal_index" , $data);
+        //     getFooter();
+        // }
         getHead();
         getContent("normal/normal_index" , $data);
         getFooter();
+
+    }
+
+    public function get_wdfdatalist_json()
+    {
+        $doctype = "wdf";
+        $ecode = getUser()->ecode;
+        get_wdfdatalist($doctype ,$ecode);
     }
 
     public function addnew()
@@ -335,8 +350,6 @@ class Normal extends MX_Controller {
     {
         $this->normal->getNorCurrencyFromDb();
     }
-
-
 
 }
 
