@@ -23,21 +23,21 @@
 				<hr class="salHr">
 
 				<div class="row">
-					<div class="col-md-4">
-						<button type="button" id="btn-addnewsal" name="btn-addnewsal" class="btn btn-primary"><i class="dw dw-add-file1  mr-2"></i>เพิ่มรายการใหม่</button>
+					<div class="col-md-4 form-group">
+						<button type="button" id="btn-addnewsal" name="btn-addnewsal" class="btn btn-primary btn-block"><i class="dw dw-add-file1  mr-2"></i>เพิ่มรายการใหม่</button>
 					</div>
 					<div class="col-md-8">
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-4 form-group">
 								<input type="text" name="startDate-sal" id="startDate-sal" class="form-control">
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 form-group">
 								<input type="text" name="endDate-sal" id="endDate-sal" class="form-control">
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 form-group">
 								<button type="button" id="btn-dateSearch-sal" name="btn-dateSearch-sal" class="btn btn-success btn-block"><i class="dw dw-loupe"></i>&nbsp;ค้นหา</button>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2 form-group">
 								<button type="button" id="btn-dateClear-sal" name="btn-dateClear-sal" class="btn btn-warning btn-block"><i class="dw dw-refresh1"></i>&nbsp;ล้าง</button>
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 				</div>
 
 				<div class="row mt-2">
-					<div class="col-md-3">
+					<div class="col-md-3 form-group">
 						<select name="filterCompany-detail-sal" id="filterCompany-detail-sal" class="form-control">
 							<option value="">กรองด้วยชื่อบริษัท</option>
 							<option value="sc">Salee Colour Public Company Limited.</option>
@@ -58,10 +58,10 @@
 					<div class="col-md-3 form-group">
 						<input type="text" name="filterUser-detail-sal" id="filterUser-detail-sal" class="form-control" placeholder="กรองชื่อผู้ร้องขอ">
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 form-group">
 						<div id="filterDept-sal"></div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3 form-group">
 						<div id="filterStatus-sal"></div>
 					</div>
 				</div>
