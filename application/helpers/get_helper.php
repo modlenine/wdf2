@@ -518,7 +518,7 @@ function get_wdfdatalist($doctype, $ecode)
         // ผู้ใช้
         if ($user_filter != "0") {
             $sql .= " AND wdf_user LIKE ?";
-            $params[] = "$user_filter%";
+            $params[] = "%$user_filter%";
         }
     
         // แผนก
