@@ -567,7 +567,11 @@ Control Advance Page
 }
 
 #advance_list{
-	width:100%;
+	min-width: 100%;
+}
+
+#advance_list_report{
+	min-width: 100%;
 }
 
 @media (min-width: 1440px) {
@@ -809,6 +813,10 @@ Control Normal Page
 	min-width: 100%;
 }
 
+#normal_list_report {
+	min-width: 100%;
+}
+
 /* Notebook, Large screens */
 @media (min-width: 1440px) {
 	#normal_list {
@@ -864,8 +872,13 @@ Control Salary Page
 ###########################################################
 */
 #salary_list{
-	width:100% !important;
+	min-width: 100%;
 }
+
+#salary_list_report{
+	min-width: 100%;
+}
+
 
 .salAddDetail{
 	font-size:26px;
@@ -978,7 +991,10 @@ Control PO Page
 ###########################################################
 */
 #po_list{
-	width:100% !important;
+	min-width:100%;
+}
+#po_list_report{
+	min-width:100%;
 }
 
 .poAddDetail{
