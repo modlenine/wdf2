@@ -38,6 +38,13 @@ class Normal extends MX_Controller {
         get_wdfdatalist($doctype ,$ecode);
     }
 
+    public function get_wdfdatalistReport_json()
+    {
+        $doctype = "wdf";
+        $ecode = getUser()->ecode;
+        get_wdfdatalist_report($doctype ,$ecode);
+    }
+
     public function addnew()
     {
         $data = array(

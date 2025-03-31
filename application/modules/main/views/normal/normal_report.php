@@ -67,19 +67,19 @@
 				<div class="row">
 					<div class="col-md-12 mt-2">
 						<div id="" class="table-responsive">
-							<table id="normal_list" class="table table-bordered table-striped">
+							<table id="normal_list_report" class="table table-bordered table-striped">
 								<thead>
 									<tr>
-										<th class="advl-th1">เลขที่คำขอ</th>
-										<th class="advl-th2">บริษัท</th>
-										<th class="advl-th3">ผู้ร้องขอ</th>
-										<th class="advl-th4">รหัสพนักงาน</th>
-										<th class="advl-th5">แผนก</th>
-										<th class="advl-th6">วันที่ร้องขอ</th>
-										<th class="advl-th7">จำนวนเงิน</th>
-										<th class="advl-th7">สกุลเงิน</th>
-										<th class="advl-th7">หมายเหตุ</th>
-										<th class="advl-th8">สถานะ</th>
+										<th class="">เลขที่คำขอ</th>
+										<th class="">บริษัท</th>
+										<th class="">ผู้ร้องขอ</th>
+										<th class="">รหัสพนักงาน</th>
+										<th class="">แผนก</th>
+										<th class="">วันที่ร้องขอ</th>
+										<th class="">จำนวนเงิน</th>
+										<th class="">สกุลเงิน</th>
+										<th class="">หมายเหตุ</th>
+										<th class="">สถานะ</th>
 									</tr>
 								</thead>
 							</table>
@@ -104,107 +104,113 @@
 
 
 
-		function load_nor_reportlist_filter()
-		{
-			let startDate_filter = $('#startDate-rp-nor').val();
-			let endDate_filter = $('#endDate-rp-nor').val();
-			let company_filter = $('#filterCompany-detail-rp-nor').val();
-			let user_filter = $('#filterUser-detail-rp-nor').val();
-			let dept_filter = $('#filterDept-detail-rp-nor').val();
-			let status_filter = $('#filterStatus-detail-rp-nor').val();
+		function load_nor_reportlist_filter() {
+			let startDate_filter = $('#startDate-rp-nor').val() || "0";
+			let endDate_filter = $('#endDate-rp-nor').val() || "0";
+			let company_filter = $('#filterCompany-detail-rp-nor').val() || "0";
+			let user_filter = $('#filterUser-detail-rp-nor').val() || "0";
+			let dept_filter = $('#filterDept-detail-rp-nor').val() || "0";
+			let status_filter = $('#filterStatus-detail-rp-nor').val() || "0";
 
-
-			if(startDate_filter == ""){
-				startDate_filter = "0";
+			if (status_filter !== "0") {
+				status_filter = status_filter.replace(/\s+/g, "-");
 			}
 
-			if(endDate_filter == ""){
-				endDate_filter = "0";
-			}
-
-			if(company_filter == ""){
-				company_filter = "0";
-			}
-
-			if(user_filter == ""){
-				user_filter = "0";
-			}
-
-			if(dept_filter == ""){
-				dept_filter = "0";
-			}
-
-			if(status_filter == ""){
-				status_filter = "0";
-			}else{
-				status_filter = status_filter.replace(/\s+/g,"-");
-			}
-
-			console.log(startDate_filter+"/"+endDate_filter+"/"+company_filter+"/"+user_filter+"/"+dept_filter+"/"+status_filter);
-
-
+			console.log(`${startDate_filter}/${endDate_filter}/${company_filter}/${user_filter}/${dept_filter}/${status_filter}`);
 
 			let thid = 1;
-			$('#normal_list thead th').each(function() {
-				var title = $(this).text();
-				$(this).html(title + ' <input type="text" id="normal_list'+thid+'" class="col-search-input" placeholder="Search ' + title + '" />');
+			$('#normal_list_report thead th').each(function () {
+				let title = $(this).text();
+				$(this).html(title + ' <input type="text" id="normal_list_report' + thid + '" class="col-search-input" placeholder="Search ' + title + '" />');
 				thid++;
 			});
-        	$('#normal_list').DataTable().destroy();
-                var table = $('#normal_list').DataTable({
-                            "scrollX": true,
-                            "processing": true,
-                            "serverSide": false,
-                            "stateSave": true,
-                            stateLoadParams: function(settings, data) {
-                                for (i = 0; i < data.columns["length"]; i++) {
-                                    let col_search_val = data.columns[i].search.search;
-                                    if (col_search_val !== "") {
-                                        $("input", $("#normal_list thead th")[i]).val(col_search_val);
-                                    }
-                                }
-                            },
-                            "ajax": {
-                                "url":"<?php echo base_url('main/normal/normal_reportlist_filter/') ?>"+startDate_filter+"/"+endDate_filter+"/"+company_filter+"/"+user_filter+"/"+dept_filter+"/"+status_filter,
-                            },
-							dom: 'Bfrtip',
-								"buttons": [{
-									extend: 'copyHtml5',
-									title: 'ใบขอเบิกจ่าย Normal'
-								},
-								{
-									extend: 'excelHtml5',
-									autoFilter: true,
-									title: 'ใบขอเบิกจ่าย Normal'
+
+			// Fetch data once then apply DataTable on it
+			$.ajax({
+				url: "<?php echo base_url('main/normal/get_wdfdatalistReport_json/') ?>",
+				type: 'POST',
+				data: {
+					startDate_filter: startDate_filter,
+					endDate_filter: endDate_filter,
+					company_filter: company_filter,
+					user_filter: user_filter,
+					dept_filter: dept_filter,
+					status_filter: status_filter
+				},
+				dataType: 'json',
+				success: function (response) {
+					$('#normal_list_report').DataTable().destroy();
+
+					let table = $('#normal_list_report').DataTable({
+						data: response,
+						scrollX: true,
+						processing: true,
+						serverSide: false,
+						stateSave: true,
+						dom: 'Bfrtip',
+						buttons: [
+							{
+								extend: 'copyHtml5',
+								title: 'ใบขอเบิกจ่าย Normal'
+							},
+							{
+								extend: 'excelHtml5',
+								autoFilter: true,
+								title: 'ใบขอเบิกจ่าย Normal'
+							}
+						],
+						columns: [
+							{
+								data: 'wdf_formno',
+								render: function (data) {
+									return `<b>${data}</b>`;
 								}
-								],
-                            order: [
-                                [0, 'desc']
-                            ],
-                            columnDefs: [{
-                                    targets: "_all",
-                                    orderable: false
-                                },
-                            ],
-                    });
+							},
+							{ data: 'wdf_areaid' },
+							{ data: 'wdf_user' },
+							{ data: 'wdf_ecode' },
+							{ data: 'wdf_dept' },
+							{ data: 'wdf_datetime' },
+							{ data: 'wdf_pricewithvat' },
+							{ data: 'wdf_currency' },
+							{ data: 'wdf_ap_memo' },
+							{
+								data: 'wdf_status',
+								render: function (data) {
+									return conColorTextStatus(data);
+								}
+							}
+						],
+						order: [[0, 'desc']],
+						columnDefs: [
+							{ targets: "_all", orderable: false },
+							{ targets: [0, 1, 2], width: "100px" },
+							{ targets: [3, 4, 5, 7], width: "50px" },
+							{ targets: [8, 9], width: "150px" }
+						]
+					});
 
-            table.columns().every(function() {
-                var table = this;
-                $('input', this.header()).on('keyup change', function() {
-                    if (table.search() !== this.value) {
-                        table.search(this.value).draw();
-                    }
-                });
-            });
+					// Enable column search
+					table.columns().every(function () {
+						let tableCol = this;
+						$('input', this.header()).on('keyup change', function () {
+							if (tableCol.search() !== this.value) {
+								tableCol.search(this.value).draw();
+							}
+						});
+					});
 
-            $('#normal_list6').prop('readonly' , true).css({
-                'background-color':'#F5F5F5',
-                'cursor':'no-drop'
-            });
+					$('#normal_list_report6').prop('readonly', true).css({
+						'background-color': '#F5F5F5',
+						'cursor': 'no-drop'
+					});
+				}
+			});
 		}
 
-		$(document).on('click' , '#btn-dateSearch-rp-nor' , function(){
 
+		$(document).on('click' , '#btn-dateSearch-rp-nor' , function(){
+			$('#normal_list_report').DataTable().destroy();
 			let startDate_filter = $('#startDate-rp-nor').val();
 			let endDate_filter = $('#endDate-rp-nor').val();
 			let company_filter = $('#filterCompany-detail-rp-nor').val();

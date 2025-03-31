@@ -30,6 +30,13 @@ class Salary extends MX_Controller {
         get_wdfdatalist($doctype ,$ecode);
     }
 
+    public function get_wdfdatalistReport_json()
+    {
+        $doctype = "sal";
+        $ecode = getUser()->ecode;
+        get_wdfdatalist_report($doctype ,$ecode);
+    }
+
     public function addnew()
     {
         $data = array(

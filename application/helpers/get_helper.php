@@ -529,7 +529,7 @@ function get_wdfdatalist($doctype, $ecode)
     
         // สถานะ
         if ($status_filter != "0") {
-            $con_status = conStatusNumToText($status_filter, "adv");
+            $con_status = conStatusNumToText($status_filter, $doctype);
             $sql .= " AND wdf_status = ?";
             $params[] = $con_status;
         }
@@ -618,6 +618,148 @@ function get_wdfdatalist($doctype, $ecode)
         'recordsFiltered' => $recordsTotal,
         'data' => $data
     ]);
+}
+
+
+function get_wdfdatalist_report($doctype, $ecode)
+{
+    $request = $_POST;
+    $deptcode = getUser()->DeptCode;
+
+    // ตรวจสอบสิทธิ์ approve
+    $sqlcheckApproveUser = gfn()->db->query("SELECT 
+        approve_user.apv_formcode 
+        FROM approve_user
+        WHERE approve_user.apv_ecode = ? AND EXISTS (
+            SELECT 1 FROM wdf_master 
+            WHERE wdf_master.wdf_formcode = approve_user.apv_formcode 
+            AND wdf_master.wdf_doctype = ?
+        )", array($ecode , $doctype));
+
+    $formcodeArray = array_column($sqlcheckApproveUser->result_array(), 'apv_formcode');
+    $useWhereIn = count($formcodeArray) > 0;
+
+    // สร้างเงื่อนไขพื้นฐาน
+    $sql = "FROM wdf_master WHERE wdf_doctype = ?";
+    $params = [$doctype];
+
+    // ถ้ามีสิทธิ์ดูเพิ่มเติม
+    if ($useWhereIn) {
+        $condition = "";
+        if(in_array($ecode, ["M0282", "M2066", "M0140", "M1344"])){
+            $condition = " AND wdf_deptcode = '$deptcode'";
+        } else if(in_array($ecode, ["M2076", "M2077", "M0051"])){
+            $condition = " AND wdf_areaid = 'TB'";
+        } else if($ecode == "M0963"){
+            $condition = "AND (wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode')";
+        }
+
+        $formcodeArray = array_unique($formcodeArray);
+        $placeholders = implode(',', array_fill(0, count($formcodeArray), '?'));
+        $sql = "FROM wdf_master WHERE (wdf_doctype = ? $condition OR wdf_formcode IN ($placeholders))";
+        $params = array_merge($params, $formcodeArray);
+
+    } else {
+        if($deptcode != "1003"){
+            if($ecode == "M0963"){
+                $sql .= " AND (wdf_areaid IN ('tb') OR wdf_deptcode = ?)";
+                $params[] = $deptcode;
+            } else {
+                $sql .= " AND wdf_deptcode = ?";
+                $params[] = $deptcode;
+            }
+        }
+    }
+
+    // Filter zone
+    $startDate_filter = $request['startDate_filter'];
+    $endDate_filter = $request['endDate_filter'];
+    $company_filter = $request['company_filter'];
+    $user_filter = $request['user_filter'];
+    $dept_filter = $request['dept_filter'];
+    $status_filter = $request['status_filter'];
+
+    if ($startDate_filter != "0" && $endDate_filter != "0") {
+        $sql .= " AND wdf_datetime BETWEEN ? AND ?";
+        $params[] = "$startDate_filter 00:00:01";
+        $params[] = "$endDate_filter 23:59:59";
+    } elseif ($startDate_filter != "0") {
+        $sql .= " AND wdf_datetime BETWEEN ? AND ?";
+        $params[] = "$startDate_filter 00:00:01";
+        $params[] = "$startDate_filter 23:59:59";
+    } elseif ($endDate_filter != "0") {
+        $sql .= " AND wdf_datetime BETWEEN ? AND ?";
+        $params[] = "$endDate_filter 00:00:01";
+        $params[] = "$endDate_filter 23:59:59";
+    }
+
+    if ($company_filter != "0") {
+        $sql .= " AND wdf_areaid = ?";
+        $params[] = $company_filter;
+    }
+
+    if ($user_filter != "0") {
+        $sql .= " AND wdf_user LIKE ?";
+        $params[] = "%$user_filter%";
+    }
+
+    if ($dept_filter != "0") {
+        $sql .= " AND wdf_deptcode = ?";
+        $params[] = $dept_filter;
+    }
+
+    if ($status_filter != "0") {
+        $con_status = conStatusNumToText($status_filter, $doctype);
+        $sql .= " AND wdf_status = ?";
+        $params[] = $con_status;
+    }
+
+    // ดึงข้อมูลทั้งหมดแบบ client-side
+    $dataQuery = gfn()->db->query("SELECT wdf_formno,
+        wdf_formcode,
+        wdf_areaid,
+        wdf_doctype,
+        wdf_status,
+        wdf_user,
+        wdf_ecode,
+        wdf_deptcode,
+        wdf_dept,
+        DATE_FORMAT(wdf_datetime , '%d/%m/%Y %H:%i:%s') AS wdf_datetime,
+        FORMAT(wdf_pricewithvat , 2) AS wdf_pricewithvat,
+        wdf_ap_memo,
+        wdf_currency $sql", $params);
+
+    $data = [];
+
+    $companyMap = [
+        "sc" => "Salee Colour",
+        "pa" => "Poly Meritasia",
+        "ca" => "Composite Asia",
+        "st" => "Subterra",
+        "tb" => "The bubbles"
+    ];
+
+    foreach ($dataQuery->result() as $row) {
+        $companyName = isset($companyMap[$row->wdf_areaid]) ? $companyMap[$row->wdf_areaid] : "Unknown";
+        $data[] = [
+            "wdf_formno" => $row->wdf_formno,
+            "wdf_formcode" => $row->wdf_formcode,
+            "wdf_areaid" => $companyName,
+            "wdf_doctype" => $row->wdf_doctype,
+            "wdf_status" => $row->wdf_status,
+            "wdf_user" => $row->wdf_user,
+            "wdf_ecode" => $row->wdf_ecode,
+            "wdf_deptcode" => $row->wdf_deptcode,
+            "wdf_dept" => $row->wdf_dept,
+            "wdf_datetime" => $row->wdf_datetime,
+            "wdf_pricewithvat" => $row->wdf_pricewithvat,
+            "wdf_ap_memo" => $row->wdf_ap_memo,
+            "wdf_currency" => $row->wdf_currency
+        ];
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($data);
 }
 
 
