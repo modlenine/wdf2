@@ -740,8 +740,63 @@
 				});
 			}
 		}
+
+
 		
 	});
+
+	function conColorTextStatus(status) {
+		let color = '';
+
+		// Approve zone
+		const approvedStatuses = [
+			"Open", "Check budget already", "Manager approved",
+			"Wait Executive Group 0 Approve", "Wait Executive Group 1 Approve",
+			"Wait Executive Group 2 Approve", "Wait Executive Group 3 Approve", "Wait Executive Group 4 Approve",
+			"Executive Group 0 Approved", "Executive Group 1 Approved", "Executive Group 2 Approved",
+			"Executive Group 3 Approved", "Executive Group 4 Approved",
+			"Executive Group 0 Approved (Clear Money)", "Executive Group 1 Approved (Clear Money)",
+			"Executive Group 2 Approved (Clear Money)", "Executive Group 3 Approved (Clear Money)",
+			"Executive Group 4 Approved (Clear Money)", "AP passed inspection",
+			"AP passed inspection (Clear Money)", "Account passed inspection", "Wait user receive money",
+			"Finance passed inspection (Clear Money)"
+		];
+
+		// Not approve zone
+		const rejectedStatuses = [
+			"Executive Group 0 Not Approve", "Executive Group 1 Not Approve",
+			"Executive Group 2 Not Approve", "Executive Group 3 Not Approve", "Executive Group 4 Not Approve",
+			"Manager not approve", "AP not pass inspection", "Account not pass inspection",
+			"Finance not pass inspection", "Manager not approve (Clear Money)",
+			"Executive Group 0 Not Approve (Clear Money)", "Executive Group 1 Not Approve (Clear Money)",
+			"Executive Group 2 Not Approve (Clear Money)", "Executive Group 3 Not Approve (Clear Money)",
+			"Executive Group 4 Not Approve (Clear Money)", "AP not pass inspection (Clear Money)",
+			"Account not pass inspection (Clear Money)", "User cancel",
+			"Finance 2 not pass inspection (Clear Money)"
+		];
+
+		// Orange (next step)
+		const nextStepStatuses = [
+			"Edit", "Complete & Wait User Clear Money"
+		];
+
+		// Complete
+		const completeStatuses = [
+			"Clear money complete", "Complete"
+		];
+
+		if (approvedStatuses.includes(status)) {
+			color = "#3399FF";
+		} else if (rejectedStatuses.includes(status)) {
+			color = "#CC0000";
+		} else if (nextStepStatuses.includes(status)) {
+			color = "#FF9900";
+		} else if (completeStatuses.includes(status)) {
+			color = "#009900";
+		}
+
+		return `<span style="color:${color};"><b>${status}</b></span>`;
+	}
 </script>
 
 

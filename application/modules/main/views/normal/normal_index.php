@@ -255,7 +255,12 @@
 								{ data: 'wdf_pricewithvat' },
 								{ data: 'wdf_currency' },
 								{ data: 'wdf_ap_memo' },
-								{ data: 'wdf_status' }
+								{ 
+									data: 'wdf_status',
+									render:function(data , type , row , meta){
+										return conColorTextStatus(data);
+									}
+								}
 							],
 							order: [
                                 [0, 'desc']
