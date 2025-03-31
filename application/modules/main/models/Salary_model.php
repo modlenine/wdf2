@@ -1863,7 +1863,7 @@ class Salary_model extends CI_Model {
             wdf_master.wdf_deptcode
             FROM
             wdf_master
-            WHERE wdf_doctype = 'sal' $condition_dept
+            WHERE wdf_doctype = 'sal'
             GROUP BY wdf_dept ORDER BY wdf_deptcode ASC");
             // Get dept
 

@@ -55,8 +55,8 @@
 							<option value="tb">The bubbles Co.,Ltd.</option>
 						</select>
 					</div>
-					<div class="col-md-3">
-						<div id="filterUser-sal"></div>
+					<div class="col-md-3 form-group">
+						<input type="text" name="filterUser-detail-sal" id="filterUser-detail-sal" class="form-control" placeholder="กรองชื่อผู้ร้องขอ">
 					</div>
 					<div class="col-md-3">
 						<div id="filterDept-sal"></div>
@@ -206,10 +206,10 @@
 			});
         	$('#salary_list').DataTable().destroy();
                 var table = $('#salary_list').DataTable({
-                            "scrollX": true,
-                            "processing": true,
-                            "serverSide": true,
-                            "stateSave": true,
+                            scrollX: true,
+                            processing: true,
+                            serverSide: true,
+                            stateSave: true,
                             stateLoadParams: function(settings, data) {
                                 for (i = 0; i < data.columns["length"]; i++) {
                                     let col_search_val = data.columns[i].search.search;
@@ -218,16 +218,51 @@
                                     }
                                 }
                             },
-                            "ajax": {
-                                "url":"<?php echo base_url('main/salary/salary_list_filter/') ?>"+startDate_filter+"/"+endDate_filter+"/"+company_filter+"/"+user_filter+"/"+dept_filter+"/"+status_filter,
+                            ajax: {
+                                url:"<?php echo base_url('main/salary/get_wdfdatalist_json/') ?>",
+								type:'POST',
+								data:function(d){
+									d.startDate_filter = startDate_filter,
+									d.endDate_filter = endDate_filter,
+									d.company_filter = company_filter,
+									d.user_filter = user_filter,
+									d.dept_filter = dept_filter,
+									d.status_filter = status_filter
+								}
                             },
-                            order: [
+							columns: [
+								{ 
+									data: 'wdf_formno' ,
+									render:function(data , type , row , meta){
+										let html = `
+										<a href="javascript:void(0)" class="select_form_sal"
+											data_formcode="${row.wdf_formcode}"
+											data_formno="${row.wdf_formno}"
+										><b>${data}</b></a>
+										`;
+										return html;
+									}
+								},
+								{ data: 'wdf_areaid' },
+								{ data: 'wdf_user' },
+								{ data: 'wdf_ecode' },
+								{ data: 'wdf_dept' },
+								{ data: 'wdf_datetime' },
+								{ data: 'wdf_pricewithvat' },
+								{ data: 'wdf_currency' },
+								{ data: 'wdf_ap_memo' },
+								{ data: 'wdf_status' }
+							],
+							order: [
                                 [0, 'desc']
                             ],
-                            columnDefs: [{
+							columnDefs: [{
                                     targets: "_all",
                                     orderable: false
                                 },
+								{targets: [0 , 1 , 2 ],width: "100px",},
+								{targets: [3 ,4 , 5, 7 ],width: "50px",},
+								{targets: [8 , 9],width: "150px",},
                             ],
                     });
 

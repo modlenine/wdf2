@@ -452,13 +452,36 @@ function get_wdfdatalist($doctype, $ecode)
 
     // ถ้ามีสิทธิ์ดูเพิ่มเติม
     if ($useWhereIn) {
+        $condition = "";
+        //M0282 = พี่ป้อน  , M2066 = พี่ภิ , M0140 = พี่โบ้ , M1344 = พี่แอร์
+        if(in_array($ecode, ["M0282", "M2066", "M0140", "M1344"])){
+            $condition = " AND wdf_deptcode = '$deptcode'";
+        }else if(in_array($ecode, ["M2076", "M2077", "M0051"])){
+        //M2076 = ฐปนีย์ TB , M2077 = ธนวีร์ TB , M0051 = นิพนธ์ TB
+            $condition = " AND wdf_areaid = 'TB'";
+        }else if($ecode == "M0963"){
+        //M0963 = พี่ภพ ได้สิทธิ์ดูรายการของ TheBubbles ทุกรายการ
+            $condition = "AND (wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode')";
+        }else{
+            $condition = "";
+        }
+
         $formcodeArray = array_unique($formcodeArray);
         $placeholders = implode(',', array_fill(0, count($formcodeArray), '?'));
-        $sql = "FROM wdf_master WHERE (wdf_doctype = ? OR wdf_formcode IN ($placeholders))";
+        $sql = "FROM wdf_master WHERE (wdf_doctype = ? $condition OR wdf_formcode IN ($placeholders))";
         $params = array_merge($params, $formcodeArray);
+
     }else{
-        $sql .= " AND wdf_deptcode = ?";
-        $params[] = $deptcode;
+        if($deptcode != "1003"){
+            if($ecode == "M0963"){
+                //M0963 = พี่ภพ ได้สิทธิ์ดูรายการของ TheBubbles ทุกรายการ
+                $sql .= " AND (wdf_areaid IN ('tb') OR wdf_deptcode = ?)";
+                $params[] = $deptcode;
+            }else{
+                $sql .= " AND wdf_deptcode = ?";
+                $params[] = $deptcode;
+            }
+        }
     }
 
 
