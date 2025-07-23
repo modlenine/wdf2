@@ -637,6 +637,12 @@
                                 $('#manager_section_nor').css('display' , '');
                                 checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
                             }
+                        }else if(doc_deptcode == '1011'){
+                            //ปรับเงื่อนไขการอนุมัติให่พี่เหน่งอนุมัติ แทนพี่แอร์ 23-07-2025
+                            if(userecode == "M0015"){
+                                $('#manager_section_nor').css('display' , '');
+                                checkpaygroup_nor(pricewithVat , 'wdf' , areaid , formcode);
+                            }
                         }else if(doc_deptcode == '1007'){
                             //ปรับเงื่อนไขการอนุมัติให้พี่หนุ่มอนุมัติแค่ของ Production 17-03-2025
                             if(userecode == "M0040" || userecode == "M0506"){

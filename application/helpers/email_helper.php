@@ -770,13 +770,25 @@ function getEmail_manager($formcode , $formno , $userdeptcode , $areaid)
             if($sql->num_rows() != 0){
                 return $sql;
             }
-        }else if($userdeptcode == 1007){
-            //ถ้าเป็น Production ส่งไปหาพี่หนุ่มพี่แบงค์
+        }else if($userdeptcode == 1011){
             $sql = emailobj()->db2->query("SELECT
             memberemail,
             ecode
             FROM member
-            WHERE ecode IN ('M0506' , 'M0040') AND resigned != 1
+            WHERE ecode IN ('M0015') AND resigned != 1
+            ");
+            //ถ้าเป็น SD ส่งไปหาพี่เหน่ง
+    
+            if($sql->num_rows() != 0){
+                return $sql;
+            }
+        }else if($userdeptcode == 1007){
+            //ถ้าเป็น Production ส่งไปหาพี่หนุ่มคนเดียวเพราะเกี่ยวกับเงิน
+            $sql = emailobj()->db2->query("SELECT
+            memberemail,
+            ecode
+            FROM member
+            WHERE ecode IN ('M0040') AND resigned != 1
             ");
     
             if($sql->num_rows() != 0){

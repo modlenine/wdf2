@@ -214,281 +214,281 @@ class Normal_model extends CI_Model {
         echo json_encode($output);
     }
 
-    public function normal_list_filter($startDate , $endDate , $company , $user , $dept , $status)
-    {
-        // DB table to use
-        $table = 'list_normal';
+    // public function normal_list_filter($startDate , $endDate , $company , $user , $dept , $status)
+    // {
+    //     // DB table to use
+    //     $table = 'list_normal';
 
-        // Table's primary key
-        $primaryKey = 'wdf_autoid';
+    //     // Table's primary key
+    //     $primaryKey = 'wdf_autoid';
 
-        $columns = array(
-            array('db' => 'wdf_formno', 'dt' => 0,
-                'formatter' => function($d , $row){
-                    $formcode = conFormNoToFormCode($d);
-                    $output ='
-                    <a href="javascript:void(0)" class="select_form_nor"
-                        data_formcode="'.$formcode.'"
-                        data_formno="'.$d.'"
-                    ><b>'.$d.'</b></a>
-                    ';
-                    return $output;
-                }
-            ),
-            array('db' => 'wdf_areaid', 'dt' => 1 ,
-                'formatter' => function($d , $row){
-                    $resultCon = "";
-                    switch($d){
-                        case "sc":
-                            $resultCon = "Salee Colour";
-                            break;
-                        case "pa":
-                            $resultCon = "Poly Meritasia";
-                            break;
-                        case "ca":
-                            $resultCon = "Composite Asia";
-                            break;
-                        case "st":
-                            $resultCon = "Subterra";
-                            break;
-                        case "tb":
-                            $resultCon = "The bubbles";
-                            break;
-                    }
-                    return $resultCon;
-                }
-            ),
-            array('db' => 'wdf_user', 'dt' => 2),
-            array('db' => 'wdf_ecode', 'dt' => 3),
-            array('db' => 'wdf_dept', 'dt' => 4),
-            array('db' => 'wdf_datetime', 'dt' => 5 ,
-                'formatter' => function($d , $row){
-                    return conDateTimeFromDb($d);
-                }
-            ),
-            array('db' => 'wdf_pricewithvat', 'dt' => 6 ,
-                'formatter' => function($d , $row){
-                    return number_format($d , 2);
-                }
-            ),
-            array('db' => 'wdf_currency', 'dt' => 7 ,
-                'formatter' => function($d , $row){
-                    if($d === null){
-                        $d = "THB";
-                    }
-                    return $d;
-                }
-            ),
-            array('db' => 'wdf_ap_memo', 'dt' => 8),
-            array('db' => 'wdf_status', 'dt' => 9,
-                'formatter' => function($d , $row){
-                    $colorText = conColorTextStatus($d);
-                    $statusHtml = '<b><span '.$colorText.'>'.$d.'</span></b>';
-                    return $statusHtml;
-                }
-            ),
-        );
+    //     $columns = array(
+    //         array('db' => 'wdf_formno', 'dt' => 0,
+    //             'formatter' => function($d , $row){
+    //                 $formcode = conFormNoToFormCode($d);
+    //                 $output ='
+    //                 <a href="javascript:void(0)" class="select_form_nor"
+    //                     data_formcode="'.$formcode.'"
+    //                     data_formno="'.$d.'"
+    //                 ><b>'.$d.'</b></a>
+    //                 ';
+    //                 return $output;
+    //             }
+    //         ),
+    //         array('db' => 'wdf_areaid', 'dt' => 1 ,
+    //             'formatter' => function($d , $row){
+    //                 $resultCon = "";
+    //                 switch($d){
+    //                     case "sc":
+    //                         $resultCon = "Salee Colour";
+    //                         break;
+    //                     case "pa":
+    //                         $resultCon = "Poly Meritasia";
+    //                         break;
+    //                     case "ca":
+    //                         $resultCon = "Composite Asia";
+    //                         break;
+    //                     case "st":
+    //                         $resultCon = "Subterra";
+    //                         break;
+    //                     case "tb":
+    //                         $resultCon = "The bubbles";
+    //                         break;
+    //                 }
+    //                 return $resultCon;
+    //             }
+    //         ),
+    //         array('db' => 'wdf_user', 'dt' => 2),
+    //         array('db' => 'wdf_ecode', 'dt' => 3),
+    //         array('db' => 'wdf_dept', 'dt' => 4),
+    //         array('db' => 'wdf_datetime', 'dt' => 5 ,
+    //             'formatter' => function($d , $row){
+    //                 return conDateTimeFromDb($d);
+    //             }
+    //         ),
+    //         array('db' => 'wdf_pricewithvat', 'dt' => 6 ,
+    //             'formatter' => function($d , $row){
+    //                 return number_format($d , 2);
+    //             }
+    //         ),
+    //         array('db' => 'wdf_currency', 'dt' => 7 ,
+    //             'formatter' => function($d , $row){
+    //                 if($d === null){
+    //                     $d = "THB";
+    //                 }
+    //                 return $d;
+    //             }
+    //         ),
+    //         array('db' => 'wdf_ap_memo', 'dt' => 8),
+    //         array('db' => 'wdf_status', 'dt' => 9,
+    //             'formatter' => function($d , $row){
+    //                 $colorText = conColorTextStatus($d);
+    //                 $statusHtml = '<b><span '.$colorText.'>'.$d.'</span></b>';
+    //                 return $statusHtml;
+    //             }
+    //         ),
+    //     );
 
-        // SQL server connection information
-        $sql_details = array(
-            'user' => getDb()->db_username,
-            'pass' => getDb()->db_password,
-            'db'   => getDb()->db_databasename,
-            'host' => getDb()->db_host
-        );
+    //     // SQL server connection information
+    //     $sql_details = array(
+    //         'user' => getDb()->db_username,
+    //         'pass' => getDb()->db_password,
+    //         'db'   => getDb()->db_databasename,
+    //         'host' => getDb()->db_host
+    //     );
 
-        /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        * If you just want to use the basic configuration for DataTables with PHP
-        * server-side, there is no need to edit below this line.
-        */
-        require('server-side/scripts/ssp.class.php');
+    //     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    //     * If you just want to use the basic configuration for DataTables with PHP
+    //     * server-side, there is no need to edit below this line.
+    //     */
+    //     require('server-side/scripts/ssp.class.php');
 
-        $ecode = getUser()->ecode;
-        $deptcode = getUser()->DeptCode;
-        $posi = getUser()->posi;
+    //     $ecode = getUser()->ecode;
+    //     $deptcode = getUser()->DeptCode;
+    //     $posi = getUser()->posi;
 
 
-        $sql_searchBydate = "";
+    //     $sql_searchBydate = "";
         
-        if($startDate == "0" && $endDate == "0"){
-            $sql_searchBydate = "wdf_datetime LIKE '%%' ";
-        }else if($startDate == "0" && $endDate != "0"){
-            $sql_searchBydate = "wdf_datetime BETWEEN '$endDate 00:00:01' AND '$endDate 23:59:59' ";
-        }else if($startDate != "0" && $endDate != "0"){
-            $sql_searchBydate = "wdf_datetime BETWEEN '$startDate 00:00:01' AND '$endDate 23:59:59' ";
-        }else if($startDate != "0" && $endDate == "0"){
-            $sql_searchBydate = "wdf_datetime BETWEEN '$startDate 00:00:01' AND '$startDate 23:59:59' ";
-        }
+    //     if($startDate == "0" && $endDate == "0"){
+    //         $sql_searchBydate = "wdf_datetime LIKE '%%' ";
+    //     }else if($startDate == "0" && $endDate != "0"){
+    //         $sql_searchBydate = "wdf_datetime BETWEEN '$endDate 00:00:01' AND '$endDate 23:59:59' ";
+    //     }else if($startDate != "0" && $endDate != "0"){
+    //         $sql_searchBydate = "wdf_datetime BETWEEN '$startDate 00:00:01' AND '$endDate 23:59:59' ";
+    //     }else if($startDate != "0" && $endDate == "0"){
+    //         $sql_searchBydate = "wdf_datetime BETWEEN '$startDate 00:00:01' AND '$startDate 23:59:59' ";
+    //     }
 
 
 
-        $query_company = "";
-        if($company == "0"){
-            $query_company = "";
-        }else{
-            $query_company = "AND wdf_areaid = '$company' ";
-        }
+    //     $query_company = "";
+    //     if($company == "0"){
+    //         $query_company = "";
+    //     }else{
+    //         $query_company = "AND wdf_areaid = '$company' ";
+    //     }
 
-        $query_user = "";
-        if($user == "0"){
-            $query_user = "";
-        }else{
-            $query_user = "AND wdf_user LIKE '$user%' ";
-        }
+    //     $query_user = "";
+    //     if($user == "0"){
+    //         $query_user = "";
+    //     }else{
+    //         $query_user = "AND wdf_user LIKE '$user%' ";
+    //     }
 
-        $query_dept = "";
-        if($dept == "0"){
-            $query_dept = "";
-        }else{
-            $query_dept = "AND wdf_deptcode = '$dept' ";
-        }
+    //     $query_dept = "";
+    //     if($dept == "0"){
+    //         $query_dept = "";
+    //     }else{
+    //         $query_dept = "AND wdf_deptcode = '$dept' ";
+    //     }
 
-        $query_status = "";
-        $con_status = "";
-        if($status == "0"){
-            $query_status = "";
-        }else{
-            $con_status = conStatusNumToText($status , "wdf");
-            $query_status = "AND wdf_status = '$con_status' ";
-        }
+    //     $query_status = "";
+    //     $con_status = "";
+    //     if($status == "0"){
+    //         $query_status = "";
+    //     }else{
+    //         $con_status = conStatusNumToText($status , "wdf");
+    //         $query_status = "AND wdf_status = '$con_status' ";
+    //     }
 
-        //check approve_user 2025-01-28
-        $inclause = checkapproveUser($ecode , "wdf");
-        $query_approve_user = "";
-        if($inclause){
-            $query_approve_user = "OR wdf_formcode IN $inclause";
-        }else{
-            $query_approve_user = "";
-        }
+    //     //check approve_user 2025-01-28
+    //     $inclause = checkapproveUser($ecode , "wdf");
+    //     $query_approve_user = "";
+    //     if($inclause){
+    //         $query_approve_user = "OR wdf_formcode IN $inclause";
+    //     }else{
+    //         $query_approve_user = "";
+    //     }
 
 
-        if($deptcode == "1003" || $ecode == "M1809"){
-            echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status")
-            );
-        }else if($posi > 75 || $ecode == "M0025" || $ecode == "M0015" || $ecode == "M0051"){
-            //กำหนดสิทธิ์ให้ พี่นิต , พี่เหน่ง , พี่พล
-            echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status ORDER BY wdf_autoid DESC")
-            );
-        }else if($ecode == "M2076" || $ecode == "M2077"){
-            echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') AND $sql_searchBydate $query_company $query_user $query_status")
-            );
-        }else if($ecode == "M0040"){
-            //กำหนดสิทธิ์สำหรับพี่หนุ่ม
-            echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
-            );
-        }else if($ecode == "M0112"){
-            //กำหนดสิทธิ์สำหรับพี่ยูง
-            echo json_encode(
-                SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
-            );
-        }else{
-            if($ecode == "M0963"){
-                //กำหนดสิทธิ์สำหรับพี่ภพ
-                echo json_encode(
-                    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
-                );
-            }else{
-                echo json_encode(
-                    SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
-                );
-            }
-        }
-    }
+    //     if($deptcode == "1003" || $ecode == "M1809"){
+    //         echo json_encode(
+    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status")
+    //         );
+    //     }else if($posi > 75 || $ecode == "M0025" || $ecode == "M0015" || $ecode == "M0051"){
+    //         //กำหนดสิทธิ์ให้ พี่นิต , พี่เหน่ง , พี่พล
+    //         echo json_encode(
+    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "$sql_searchBydate $query_company $query_user $query_dept $query_status ORDER BY wdf_autoid DESC")
+    //         );
+    //     }else if($ecode == "M2076" || $ecode == "M2077"){
+    //         echo json_encode(
+    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') AND $sql_searchBydate $query_company $query_user $query_status")
+    //         );
+    //     }else if($ecode == "M0040"){
+    //         //กำหนดสิทธิ์สำหรับพี่หนุ่ม
+    //         echo json_encode(
+    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1007') AND wdf_areaid IN ('sc','ca','pa') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+    //         );
+    //     }else if($ecode == "M0112"){
+    //         //กำหนดสิทธิ์สำหรับพี่ยูง
+    //         echo json_encode(
+    //             SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode IN ('1014' , '1015' , '1006') AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+    //         );
+    //     }else{
+    //         if($ecode == "M0963"){
+    //             //กำหนดสิทธิ์สำหรับพี่ภพ
+    //             echo json_encode(
+    //                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_areaid IN ('tb') OR wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+    //             );
+    //         }else{
+    //             echo json_encode(
+    //                 SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, null, "wdf_deptcode = '$deptcode' AND $sql_searchBydate $query_company $query_user $query_dept $query_status")
+    //             );
+    //         }
+    //     }
+    // }
 
-    public function get_wdfdatalist_json()
-    {
-        $ecode = getUser()->ecode;
-        $doctype = "wdf";
-        $search = $this->input->post('search')['value'];
-        $orderColumn = $this->input->post('order')[0]['column'];
-        $orderDir = $this->input->post('order')[0]['dir'];
-        $start = $this->input->post('start');
-        $length = $this->input->post('length');
+    // public function get_wdfdatalist_json()
+    // {
+    //     $ecode = getUser()->ecode;
+    //     $doctype = "wdf";
+    //     $search = $this->input->post('search')['value'];
+    //     $orderColumn = $this->input->post('order')[0]['column'];
+    //     $orderDir = $this->input->post('order')[0]['dir'];
+    //     $start = $this->input->post('start');
+    //     $length = $this->input->post('length');
 
-        // Map ชื่อคอลัมน์กับ index
-        $columns = [
-            'wdf_formno',
-            'wdf_formcode',
-            'wdf_areaid',
-            'wdf_doctype',
-            'wdf_status',
-            'wdf_user',
-            'wdf_pricewithvat',
-            'wdf_currency',
-            'wdf_datetime'
-        ];
-        $orderBy = $columns[$orderColumn];
+    //     // Map ชื่อคอลัมน์กับ index
+    //     $columns = [
+    //         'wdf_formno',
+    //         'wdf_formcode',
+    //         'wdf_areaid',
+    //         'wdf_doctype',
+    //         'wdf_status',
+    //         'wdf_user',
+    //         'wdf_pricewithvat',
+    //         'wdf_currency',
+    //         'wdf_datetime'
+    //     ];
+    //     $orderBy = $columns[$orderColumn];
 
-        // ตรวจสอบสิทธิ์ approve
-        $sqlcheckApproveUser = $this->db->query("SELECT 
-        apv_formcode FROM approve_user WHERE apv_ecode = ?
-        ", array($ecode));
+    //     // ตรวจสอบสิทธิ์ approve
+    //     $sqlcheckApproveUser = $this->db->query("SELECT 
+    //     apv_formcode FROM approve_user WHERE apv_ecode = ?
+    //     ", array($ecode));
 
-        $formcodeArray = array_column($sqlcheckApproveUser->result_array(), 'apv_formcode');
-        $useWhereIn = count($formcodeArray) > 0;
-        $formcodePlaceholder = implode(',', array_fill(0, count($formcodeArray), '?'));
+    //     $formcodeArray = array_column($sqlcheckApproveUser->result_array(), 'apv_formcode');
+    //     $useWhereIn = count($formcodeArray) > 0;
+    //     $formcodePlaceholder = implode(',', array_fill(0, count($formcodeArray), '?'));
 
-        // เงื่อนไขหลัก
-        $baseSQL = "SELECT * FROM wdf_master
-            WHERE wdf_doctype = ?
-        ";
-        $params = [$doctype];
+    //     // เงื่อนไขหลัก
+    //     $baseSQL = "SELECT * FROM wdf_master
+    //         WHERE wdf_doctype = ?
+    //     ";
+    //     $params = [$doctype];
 
-        // เงื่อนไขสิทธิ์เพิ่มเติม
-        if ($useWhereIn) {
-            $baseSQL .= " AND wdf_formcode IN ($formcodePlaceholder)";
-            $params = array_merge($params, $formcodeArray);
-        }
+    //     // เงื่อนไขสิทธิ์เพิ่มเติม
+    //     if ($useWhereIn) {
+    //         $baseSQL .= " AND wdf_formcode IN ($formcodePlaceholder)";
+    //         $params = array_merge($params, $formcodeArray);
+    //     }
 
-        // เงื่อนไข search
-        if (!empty($search)) {
-            $baseSQL .= " AND (
-                wdf_formno LIKE ? OR
-                wdf_user LIKE ? OR
-                wdf_status LIKE ?
-            )";
-            $params = array_merge($params, array_fill(0, 3, "%$search%"));
-        }
+    //     // เงื่อนไข search
+    //     if (!empty($search)) {
+    //         $baseSQL .= " AND (
+    //             wdf_formno LIKE ? OR
+    //             wdf_user LIKE ? OR
+    //             wdf_status LIKE ?
+    //         )";
+    //         $params = array_merge($params, array_fill(0, 3, "%$search%"));
+    //     }
 
-        // นับ total records ทั้งหมด
-        $queryAll = $this->db->query($baseSQL, $params);
-        $recordsTotal = $queryAll->num_rows();
+    //     // นับ total records ทั้งหมด
+    //     $queryAll = $this->db->query($baseSQL, $params);
+    //     $recordsTotal = $queryAll->num_rows();
 
-        // เพิ่ม order + limit
-        $baseSQL .= " ORDER BY $orderBy $orderDir LIMIT ?, ?";
-        $params[] = (int) $start;
-        $params[] = (int) $length;
+    //     // เพิ่ม order + limit
+    //     $baseSQL .= " ORDER BY $orderBy $orderDir LIMIT ?, ?";
+    //     $params[] = (int) $start;
+    //     $params[] = (int) $length;
 
-        $queryPage = $this->db->query($baseSQL, $params);
+    //     $queryPage = $this->db->query($baseSQL, $params);
 
-        // จัด format ผลลัพธ์
-        $data = [];
-        foreach ($queryPage->result() as $row) {
-            $data[] = [
-                "wdf_formno" => $row->wdf_formno,
-                "wdf_formcode" => $row->wdf_formcode,
-                "wdf_areaid" => $row->wdf_areaid,
-                "wdf_doctype" => $row->wdf_doctype,
-                "wdf_status" => $row->wdf_status,
-                "wdf_user" => $row->wdf_user,
-                "wdf_pricewithvat" => $row->wdf_pricewithvat,
-                "wdf_currency" => $row->wdf_currency,
-                "wdf_datetime" => $row->wdf_datetime
-            ];
-        }
+    //     // จัด format ผลลัพธ์
+    //     $data = [];
+    //     foreach ($queryPage->result() as $row) {
+    //         $data[] = [
+    //             "wdf_formno" => $row->wdf_formno,
+    //             "wdf_formcode" => $row->wdf_formcode,
+    //             "wdf_areaid" => $row->wdf_areaid,
+    //             "wdf_doctype" => $row->wdf_doctype,
+    //             "wdf_status" => $row->wdf_status,
+    //             "wdf_user" => $row->wdf_user,
+    //             "wdf_pricewithvat" => $row->wdf_pricewithvat,
+    //             "wdf_currency" => $row->wdf_currency,
+    //             "wdf_datetime" => $row->wdf_datetime
+    //         ];
+    //     }
 
-        // ส่งกลับ
-        echo json_encode([
-            "draw" => intval($this->input->post('draw')),
-            "recordsTotal" => $recordsTotal,
-            "recordsFiltered" => $recordsTotal,
-            "data" => $data
-        ]);
-    }
+    //     // ส่งกลับ
+    //     echo json_encode([
+    //         "draw" => intval($this->input->post('draw')),
+    //         "recordsTotal" => $recordsTotal,
+    //         "recordsFiltered" => $recordsTotal,
+    //         "data" => $data
+    //     ]);
+    // }
 
 
 

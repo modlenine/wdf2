@@ -472,7 +472,7 @@ function get_wdfdatalist($doctype, $ecode)
         $params = array_merge($params, $formcodeArray);
 
     }else{
-        if($deptcode != "1003"){
+        if($deptcode != "1003" && $ecode != "M1809"){
             if($ecode == "M0963"){
                 //M0963 = พี่ภพ ได้สิทธิ์ดูรายการของ TheBubbles ทุกรายการ
                 $sql .= " AND (wdf_areaid IN ('tb') OR wdf_deptcode = ?)";

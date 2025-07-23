@@ -1,41 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/*
-|--------------------------------------------------------------------------
-| Base Site URL
-|--------------------------------------------------------------------------
-|
-| URL to your CodeIgniter root. Typically this will be your base URL,
-| WITH a trailing slash:
-|
-|	http://example.com/
-|
-| WARNING: You MUST set this value!
-|
-| If it is not set, then CodeIgniter will try guess the protocol and path
-| your installation, but due to security concerns the hostname will be set
-| to $_SERVER['SERVER_ADDR'] if available, or localhost otherwise.
-| The auto-detection mechanism exists only for convenience during
-| development and MUST NOT be used in production!
-|
-| If you need to allow multiple domains, remember that this file is still
-| a PHP script and you can easily do that on your own.
-|
-*/
+
 $url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'];
 $config['base_url'] = "$url/intsys/wdf2";
 
-/*
-|--------------------------------------------------------------------------
-| Index File
-|--------------------------------------------------------------------------
-|
-| Typically this will be your index.php file, unless you've renamed it to
-| something else. If you are using mod_rewrite to remove the page set this
-| variable so that it is blank.
-|
-*/
 $config['index_page'] = '';
 
 /*
@@ -380,7 +349,7 @@ $config['encryption_key'] = '';
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = 14400;
 $config['sess_save_path'] = $_SERVER['DOCUMENT_ROOT']."/intranet/sessions";
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
