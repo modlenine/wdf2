@@ -1346,6 +1346,11 @@
                         }else if(areaid == "tb" && userecode == "M0051" || areaid == "tb" && userecode == "M2076"){
                             $('#managerclearmoney_section').css('display' , '');
                             checkpaygroupClear(fnc_money , 'adv' , areaid , formcode , appgroup);
+                        }else if(doc_deptcode == "1011"){
+                            if(userecode == "M0015"){
+                                $('#managerclearmoney_section').css('display' , '');
+                                checkpaygroupClear(fnc_money , 'adv' , areaid , formcode , appgroup);
+                            }
                         }
 
                         if(areaid == "tb"){
