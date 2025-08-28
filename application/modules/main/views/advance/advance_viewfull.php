@@ -1351,6 +1351,11 @@
                                 $('#managerclearmoney_section').css('display' , '');
                                 checkpaygroupClear(fnc_money , 'adv' , areaid , formcode , appgroup);
                             }
+                        }else if(areaid == "st"){
+                            if(userecode == "M0025"){
+                                $('#managerclearmoney_section').css('display' , '');
+                                checkpaygroupClear(fnc_money , 'adv' , areaid , formcode , appgroup);
+                            }
                         }
 
                         if(areaid == "tb"){
