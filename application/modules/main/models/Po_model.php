@@ -1495,7 +1495,8 @@ class Po_model extends CI_Model {
                     ON vendpurchorderjour.purchid = purchtable.purchid
                     AND vendpurchorderjour.invoiceaccount = purchtable.invoiceaccount
                     AND vendpurchorderjour.dataareaid = purchtable.dataareaid
-                WHERE purchtable.purchstatus = 1
+                WHERE purchtable.purchstatus IN (1)
+                -- 1= Open order , 2= Received , 3= Invoiced
                 GROUP BY 
                     vendpurchorderjour.purchaseorderid,
                     vendpurchorderjour.purchid,

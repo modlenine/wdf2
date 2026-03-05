@@ -359,7 +359,7 @@
                             "detaillist":wdf_trans[i].tr_detailname,
                             "accode":wdf_trans[i].tr_detailaccode,
                             "accodename":wdf_trans[i].tr_detailaccodename,
-                            "deptcode":wdf_trans[i].tr_deptcode,
+                            "deptcode":wdf_trans[i].tr_detaildeptcode,
                             "price":wdf_trans[i].tr_money,
                             "detailautoid":wdf_trans[i].tr_autoid
                             }

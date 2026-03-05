@@ -106,6 +106,8 @@ function emailSaveData($subject , $body ,$to , $cc)
 
     if($_SERVER['HTTP_HOST'] != "localhost"){
         if(!$mail->send()){
+            // Log error from first attempt
+            error_log("Email send failed with account 1, trying account 2");
             emailSaveData2($subject , $body ,$to , $cc);
         }
     }
@@ -185,10 +187,9 @@ function emailSaveData2($subject , $body ,$to , $cc)
     '.$body;
     
 
-    // if($_SERVER['HTTP_HOST'] != "localhost"){
-    //     $mail->send();
-    // }
-    $mail->send();
+    if($_SERVER['HTTP_HOST'] != "localhost"){
+        $mail->send();
+    }
 }
 
 
